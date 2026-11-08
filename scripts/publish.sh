@@ -207,14 +207,12 @@ curl -sS "${CURL_OPTS[@]}" --max-time 180 --retry 2 --retry-delay 1 --retry-all-
   -o "$TMP/gh_asset.json"
 echo "  已上传附件 $ASSET_NAME"
 
-echo "[7/7] 发布 Gitee Release（含免责声明）"
+echo "[7/7] 发布 Gitee Release（含免责声明与 zip 附件）"
 GITEE_REL_API="https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO/releases"
 gitee_api "$GITEE_REL_API?access_token=$GITEE_TOKEN" -o "$TMP/gitee_releases.json" || true
-if "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1],encoding="utf-8")); sys.exit(0 if any(r.get("tag_name")==sys.argv[2] for r in d) else 1)' \
+if ! "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1],encoding="utf-8")); sys.exit(0 if any(r.get("tag_name")==sys.argv[2] for r in d) else 1)' \
     "$TMP/gitee_releases.json" "$TAG" 2>/dev/null; then
-  echo "  Gitee Release $TAG 已存在，跳过"
-else
-  # Gitee 的 Release 要求 tag 已推送；POST 偶发 schannel close_notify，故发完再查一次确认
+  # Gitee 的 Release 要求 tag 已推送；POST 偶发连接重置，发完再查一次确认
   gitee_api -X POST \
     --data-urlencode "access_token=$GITEE_TOKEN" \
     --data-urlencode "tag_name=$TAG" \
@@ -222,13 +220,35 @@ else
     --data-urlencode "target_commitish=$BRANCH" \
     --data-urlencode "body@RELEASE_NOTES.md" \
     "$GITEE_REL_API" -o "$TMP/gitee_release.json" || true
-  gitee_api "$GITEE_REL_API?access_token=$GITEE_TOKEN" -o "$TMP/gitee_releases2.json" || true
-  if "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1],encoding="utf-8")); sys.exit(0 if any(r.get("tag_name")==sys.argv[2] for r in d) else 1)' \
-      "$TMP/gitee_releases2.json" "$TAG" 2>/dev/null; then
-    echo "  已创建 Gitee Release $TAG"
-  else
-    echo "  Gitee Release 未创建成功，请在网页端手动补发（代码与 tag 已同步）"
-  fi
+  gitee_api "$GITEE_REL_API?access_token=$GITEE_TOKEN" -o "$TMP/gitee_releases.json" || true
+fi
+REL_INFO=$("$PY" - "$TMP/gitee_releases.json" "$TAG" "$ASSET_NAME" <<'PY'
+import json, sys
+try:
+    data = json.load(open(sys.argv[1], encoding="utf-8"))
+except Exception:
+    data = []
+tag, asset = sys.argv[2], sys.argv[3]
+for r in data:
+    if r.get("tag_name") == tag:
+        has = any(a.get("name") == asset for a in (r.get("assets") or []))
+        print(r["id"], 1 if has else 0)
+        break
+else:
+    print("0 0")
+PY
+)
+read -r GITEE_RID HAS_ASSET <<< "$REL_INFO"
+if [[ "${GITEE_RID:-0}" == "0" ]]; then
+  echo "  Gitee Release 未创建成功，请在网页端手动补发（代码与 tag 已同步）"
+elif [[ "$HAS_ASSET" == "1" ]]; then
+  echo "  Gitee Release $TAG 与附件均已存在，跳过"
+else
+  gitee_api -X POST \
+    -F "access_token=$GITEE_TOKEN" \
+    -F "file=@$ZIP;type=application/zip" \
+    "$GITEE_REL_API/$GITEE_RID/attach_files" -o "$TMP/gitee_attach.json" || true
+  echo "  已上传附件 $ASSET_NAME 到 Gitee Release"
 fi
 
 echo
