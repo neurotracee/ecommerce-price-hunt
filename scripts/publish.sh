@@ -116,11 +116,12 @@ gh_api -X PATCH -H "Content-Type: application/json" --data-binary "@$TMP/gh_desc
 gitee_code=$(gitee_api -o /dev/null -w "%{http_code}" \
   "https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO?access_token=$GITEE_TOKEN" || true)
 if [[ "$gitee_code" == "404" ]]; then
+  # 表单里的字符串 "false" 在 Gitee 后端会被当成真值、把仓库建成私有；
+  # 省略 private 用默认公开，下面再用 JSON 布尔强制确认一次。
   gitee_api -X POST \
     --data-urlencode "access_token=$GITEE_TOKEN" \
     --data-urlencode "name=$REPO" \
     --data-urlencode "description=$DESC" \
-    --data-urlencode "private=false" \
     --data-urlencode "has_issues=true" \
     --data-urlencode "has_wiki=false" \
     --data-urlencode "auto_init=false" \
@@ -129,12 +130,16 @@ if [[ "$gitee_code" == "404" ]]; then
 else
   echo "  Gitee 仓库已存在 ($gitee_code)"
 fi
-# Gitee 的 PATCH 要求同时带 name；简介与 GitHub 保持一致
-gitee_api -X PATCH \
-  --data-urlencode "access_token=$GITEE_TOKEN" \
-  --data-urlencode "name=$REPO" \
-  --data-urlencode "description=$DESC" \
-  --data-urlencode "homepage=$UPSTREAM" \
+# Gitee 的 PATCH 要求同时带 name；用 JSON 布尔明确设为公开仓库，
+# 否则 Release 页面与附件直链对未登录访客会返回 403。
+"$PY" - "$GITEE_TOKEN" "$REPO" "$DESC" "$UPSTREAM" <<'PY' > "$TMP/gitee_repo_patch.json"
+import json, sys
+print(json.dumps({"access_token": sys.argv[1], "name": sys.argv[2],
+                  "description": sys.argv[3], "homepage": sys.argv[4],
+                  "private": False, "public": True}, ensure_ascii=False))
+PY
+gitee_api -X PATCH -H "Content-Type: application/json" \
+  --data-binary "@$TMP/gitee_repo_patch.json" \
   "https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO" -o /dev/null || true
 
 echo "[4/7] 提交与打标签"
