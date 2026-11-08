@@ -143,9 +143,11 @@ require("MIT" in readme, "README.md 缺少代码许可说明")
 GH_REPO = "https://github.com/neurotracee/ecommerce-price-hunt"
 GITEE_REPO = "https://gitee.com/bio234/ecommerce-price-hunt"
 for name, text in (("README.md", readme), ("NOTICE.md", notice), ("RELEASE_NOTES.md", release_notes),
-                   ("LICENSE", read("LICENSE")), ("LICENSE-DOCS.md", read("LICENSE-DOCS.md"))):
+                   ("LICENSE-DOCS.md", read("LICENSE-DOCS.md"))):
     require(GH_REPO in text, f"{name} 缺少 GitHub 源仓库地址")
     require(GITEE_REPO in text, f"{name} 缺少 Gitee 源仓库地址")
+# LICENSE 必须保持标准 MIT 原文，多余内容会让平台把许可识别成 NOASSERTION
+require("github.com" not in read("LICENSE"), "LICENSE 不应写入额外内容（会破坏平台对 MIT 的自动识别）")
 for name, text in (("README.md", readme), ("NOTICE.md", notice), ("RELEASE_NOTES.md", release_notes)):
     require("同一作者" in text or "same author" in text,
             f"{name} 未说明两个仓库由同一作者管理")
