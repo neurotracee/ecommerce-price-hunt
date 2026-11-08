@@ -312,8 +312,9 @@ else
   if [[ -s "$TMP/gitee_attach_list.json" ]]; then
     for aid in $("$PY" -c 'import json,sys; d=json.load(open(sys.argv[1],encoding="utf-8")); print(" ".join(str(a["id"]) for a in d if a.get("name")==sys.argv[2]))' \
         "$TMP/gitee_attach_list.json" "$ASSET_NAME" 2>/dev/null); do
-      gitee_api -X DELETE --data-urlencode "access_token=$GITEE_TOKEN" \
-        "$GITEE_REL_API/$GITEE_RID/attach_files/$aid" -o /dev/null || true
+      # access_token 必须走 query string，放在 DELETE 的 body 里 Gitee 不认
+      gitee_api -X DELETE \
+        "$GITEE_REL_API/$GITEE_RID/attach_files/$aid?access_token=$GITEE_TOKEN" -o /dev/null || true
     done
   fi
   gitee_api -X POST \
