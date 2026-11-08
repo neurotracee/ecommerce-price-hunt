@@ -42,6 +42,13 @@
 - 明确「不要把下载链接发给 AI、不要让它跳转去下载」，避免多余的跳转、重试与 token 消耗；不再要求 clone 仓库或敲命令。
 - 同步到 GitHub 与 Gitee 的仓库首页、简介、Release 正文与附件。
 
+### 文档修订 · 2026-11-08（标签与许可证元数据）
+
+- 上游关系补全：DSH go 是基于 **DeepSeek Harness** 的二次开发方向，其仓库标签含 `deepseek` / `deepseek-harness`；已写入 README（中英）、NOTICE、CITATION.cff 关键词与仓库简介。
+- 两端仓库标签同步为 10 个（含 `deepseek`、`deepseek-harness`）；发布脚本改为**读取现有标签后合并去重**，不再覆盖使用者在网页端手动新增的 topics。
+- `LICENSE` 恢复为**标准 MIT 全文**（去掉末尾自定义尾注）：此前平台自动识别把 MIT 判成 `Other` / 空。现在 GitHub 侧栏显示 MIT License、Gitee 仓库显示 MIT。双许可说明移到 `NOTICE.md`、`LICENSE-DOCS.md`、README 与 Release 正文。
+- README（中英）顶部新增**纯文字许可声明**，避免 shields.io 徽章图片加载不出来时看不到协议；并明确「平台侧栏的 MIT 仅覆盖代码与模板，文档与提示词是 CC BY-NC-SA 4.0 非商业」。
+
 ### 说明
 
 - 报告样式与双屏自检优先复用宿主自带 HTML 技能；`docs/portability.md` 给出无 HTML 技能时的替代做法，避免强绑定 DSH go 的本地路径。
