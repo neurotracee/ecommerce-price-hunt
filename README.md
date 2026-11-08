@@ -3,6 +3,7 @@
 > **项目定位（请先读这一段）**
 > 这是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 做的一个**附属功能的开源项目**：把「让 AI 自动完成商品/药品全网比价」这项能力，以一份可复用的 Skill（提示词 + 操作手册）形式沉淀下来，供 DSH go 及其他具备读屏能力的 AI Agent 参考使用。
 > 上游原仓库：**<https://github.com/ccch1mneyyy/dsh-go/>**
+> 上游 DSH go 是基于 **DeepSeek Harness** 的二次开发方向（其仓库标签含 `deepseek`、`deepseek-harness`）；本项目沿用的是同一类 Agent 能力语境，不含上游代码、也不隶属于上游。
 > 本项目**不是 DSH go 的官方组件**，不隶属于上游项目，也不包含、不复制上游的任何代码；它是一个独立发布、独立授权的方法论参考包。
 
 ---
@@ -32,6 +33,8 @@ DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装
 [![License: MIT](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/docs-CC%20BY--NC--SA%204.0-orange.svg)](LICENSE-DOCS.md)
 [![DSH go](https://img.shields.io/badge/for-DSH%20go-2f6f4f)](https://github.com/ccch1mneyyy/dsh-go/)
+
+> **开源协议（文字版，不依赖徽章图片）**：代码与模板 **MIT**；文档与提示词 **CC BY-NC-SA 4.0**（署名 - 非商业性使用 - 相同方式共享，商用需另行书面授权）。许可证文件分别是 `LICENSE` 与 `LICENSE-DOCS.md`；完整说明见文末「许可」章节。
 
 ---
 
@@ -165,6 +168,8 @@ ecommerce-price-hunt/
 欢迎补充平台实录、修正坑位、翻译与文档改进。请读 [CONTRIBUTING.md](CONTRIBUTING.md)：**不要**提交真实品牌 / 真实价格 / 真实店铺数据、个人信息、爬虫或绕过类代码。
 
 ## 许可
+
+> ⚠️ **关于平台侧栏显示的许可证**：GitHub / Gitee 自动识别到的 **MIT 仅覆盖代码与模板**（`assets/`、`scripts/`，以及 `LICENSE` 本身）。**文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`）是 CC BY-NC-SA 4.0，含非商业条款**，以 `LICENSE-DOCS.md` 为准。请勿把仓库侧栏的「MIT license」当成整个项目的授权。
 
 - **代码与模板**（`assets/`、`scripts/`）：[MIT](LICENSE)。
 - **文档与提示词**（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`）：[CC BY-NC-SA 4.0](LICENSE-DOCS.md)（署名 - 非商业性使用 - 相同方式共享）。商业用途（含对外提供比价服务）需另行获得书面授权。

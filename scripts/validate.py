@@ -156,6 +156,23 @@ for name in ("docs/faq.md", "examples/prompt-examples.md", "docs/portability.md"
     require(INSTALL_PROMPT in read(name), f"{name} 缺少「一句话安装」提示词")
 
 
+# ------------------------------------------- 5c. license & upstream metadata
+lic = read("LICENSE")
+require(lic.startswith("MIT License"), "LICENSE 不是标准 MIT 文本，平台无法识别许可证")
+require(lic.rstrip().endswith("SOFTWARE."),
+        "LICENSE 末尾有多余内容，平台会把 MIT 误判为 Other")
+require("CC BY-NC-SA" not in lic,
+        "LICENSE 不应混入文档许可说明（会破坏平台对 MIT 的自动识别）")
+require("MIT 仅覆盖代码" in readme, "README.md 缺少「平台 MIT 仅覆盖代码」提示")
+require("code and templates only" in readme_en,
+        "README.en.md 缺少「MIT only covers code」提示")
+require("deepseek-harness" in read("CITATION.cff"),
+        "CITATION.cff 缺少 deepseek-harness 关键词")
+require("DeepSeek Harness" in notice, "NOTICE.md 缺少上游 DeepSeek Harness 说明")
+require("deepseek-harness" in read("scripts/publish.sh"),
+        "发布脚本默认标签缺少 deepseek-harness")
+
+
 # ------------------------------------------------------- 6. sample data safety
 skeleton = read("assets/report-skeleton.html")
 require("虚构" in skeleton, "report-skeleton.html 未标注示例数据为虚构")

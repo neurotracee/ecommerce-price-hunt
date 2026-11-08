@@ -100,9 +100,34 @@ PY
 else
   echo "  GitHub 仓库已存在 ($gh_code)"
 fi
-gh_api -X PUT -H "Content-Type: application/json" \
-  --data '{"names":["ai-agent","skill","prompt-engineering","price-comparison","ecommerce","dsh-go","accessibility","agent-skills"]}' \
+# 标签：先读两端现有标签，与项目默认清单合并去重后再写回，
+# 避免覆盖使用者在网页端手动新增的 topics（如 deepseek / deepseek-harness）
+DEFAULT_TOPICS=(ai-agent skill prompt-engineering price-comparison ecommerce dsh-go \
+                deepseek deepseek-harness accessibility agent-skills)
+gh_api "https://api.github.com/repos/$GH_OWNER/$REPO/topics" -o "$TMP/gh_topics.json" || true
+gitee_api "https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO/project_labels?access_token=$GITEE_TOKEN" \
+  -o "$TMP/gitee_labels.json" || true
+"$PY" - "$TMP/gh_topics.json" "$TMP/gitee_labels.json" "${DEFAULT_TOPICS[@]}" <<'PY' > "$TMP/topics_merged.json"
+import json, sys
+def load(path, kind):
+    try:
+        d = json.load(open(path, encoding='utf-8'))
+        return d.get('names', []) if kind == 'gh' else [x.get('name') for x in d]
+    except Exception:
+        return []
+names = list(dict.fromkeys(load(sys.argv[1], 'gh') + load(sys.argv[2], 'gitee') + sys.argv[3:]))
+print(json.dumps(names, ensure_ascii=False))
+PY
+"$PY" - "$TMP/topics_merged.json" <<'PY' > "$TMP/gh_topics_put.json"
+import json, sys
+print(json.dumps({"names": json.load(open(sys.argv[1], encoding='utf-8'))}, ensure_ascii=False))
+PY
+gh_api -X PUT -H "Content-Type: application/json" --data-binary "@$TMP/gh_topics_put.json" \
   "https://api.github.com/repos/$GH_OWNER/$REPO/topics" -o /dev/null || true
+gitee_api -X PUT -H "Content-Type: application/json" --data-binary "@$TMP/topics_merged.json" \
+  "https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO/project_labels?access_token=$GITEE_TOKEN" \
+  -o /dev/null || true
+echo "  已同步两端标签（合并去重，保留手动新增）"
 # 简介（About 区）也带上「下载 zip 直接发给 DSH」的提示，已存在的仓库同样更新
 "$PY" - "$DESC" <<'PY' > "$TMP/gh_desc.json"
 import json, sys

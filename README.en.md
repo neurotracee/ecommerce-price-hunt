@@ -5,6 +5,7 @@
 > **Project positioning — read this first**
 > This is an **open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/)**. It packages the "let an AI automatically compare product / medicine prices across stores" capability as a reusable Skill (prompts + operating playbooks), for DSH go and other AI Agents with screen-reading ability.
 > Upstream repository: **<https://github.com/ccch1mneyyy/dsh-go/>**
+> Upstream DSH go is built along the **DeepSeek Harness** direction (its repository topics include `deepseek` and `deepseek-harness`); this project shares that Agent-capability context but contains no upstream code and is not affiliated with it.
 > This project is **not an official DSH go component**, is not affiliated with the upstream project, and contains or copies **no upstream code**. It is an independently published and independently licensed methodology reference.
 
 ---
@@ -23,6 +24,8 @@
    > 帮我安装它到本地目录即可，我要把它添加进来。
 
    *(“Install it into my local directory for me — I want to add it to my skills.”)* DSH unzips it into the local skills folder and reports the path. Then start a task with: 「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」.
+
+> **License (plain text, in case badge images do not load)**: code and templates are **MIT**; documentation and prompts are **CC BY-NC-SA 4.0** (attribution, non-commercial, share-alike; commercial use needs separate written permission). See `LICENSE`, `LICENSE-DOCS.md` and the License section at the end of this file.
 
 ---
 
@@ -97,6 +100,8 @@ Recommended ceiling: ≤30 links and ≤3 deeply-examined platforms per task. Re
 Each release ships a ready-to-install zip and repeats the full disclaimer plus the DSH go attribution in its notes. Mirrored on Gitee. See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
+
+> ⚠️ **About the license shown by the platform**: the **MIT** label auto-detected by GitHub / Gitee covers **code and templates only** (`assets/`, `scripts/`, and `LICENSE` itself). **Documentation and prompts (`README*`, `SKILL.md`, `references/`, `docs/`, `examples/`) are CC BY-NC-SA 4.0 with a non-commercial clause** — see `LICENSE-DOCS.md`. Do not read the sidebar "MIT license" as the license for the whole project.
 
 - Code and templates (`assets/`, `scripts/`): [MIT](LICENSE).
 - Documentation and prompts (`README*`, `SKILL.md`, `references/`, `docs/`, `examples/`): [CC BY-NC-SA 4.0](LICENSE-DOCS.md). Commercial use (including commercial price-comparison services) requires separate written permission.

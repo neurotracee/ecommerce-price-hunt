@@ -55,6 +55,7 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 
 - 代码与模板（`assets/`、`scripts/`）：MIT
 - 文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`）：CC BY-NC-SA 4.0（署名 - 非商业性使用 - 相同方式共享）；商业用途需另行获得书面授权
+- 平台侧栏自动识别的 **MIT 仅覆盖代码与模板**；文档与提示词为非商业的 CC BY-NC-SA 4.0，以 `LICENSE-DOCS.md` 为准，请勿把侧栏的 MIT 当成整个项目的授权
 - 因含 NC 条款，本项目为源码公开 / 非商业自由使用，而非 OSI 认证的开源软件
 
 上游 DSH go 采用 AGPL-3.0；本项目为独立作品、独立授权，不含其代码，也不代表上游立场。

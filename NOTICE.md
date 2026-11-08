@@ -5,7 +5,7 @@
 本项目是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 制作的**附属功能**开源项目：把「AI 自动全网比价」沉淀成一份可复用的 Skill。
 
 - 上游原仓库：<https://github.com/ccch1mneyyy/dsh-go/>
-- 上游简介：dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑。
+- 上游简介：dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑。即上游是**基于 DeepSeek Harness 的二次开发方向**（其仓库标签含 `deepseek`、`deepseek-harness`）。
 - 上游许可：AGPL-3.0。
 
 **声明**：
@@ -14,6 +14,7 @@
 2. 本项目**不包含、不复制、不分发**上游的任何源代码或二进制文件；`SKILL.md` 中出现的 `~/.dsh/skills/...` 仅是**目录约定示例**，可由任意宿主替换（见 `docs/portability.md`）。
 3. 本项目是独立作品，采用独立授权：代码/模板 MIT，文档/提示词 CC BY-NC-SA 4.0。上游 AGPL-3.0 不适用于本项目文件。
 4. 名称「DSH go」及其商标归各自权利人所有；此处仅为说明兼容性与出处而作指代性使用。
+5. **平台侧栏显示的 MIT 仅覆盖代码与模板**；文档与提示词采用 CC BY-NC-SA 4.0（含非商业条款），以 `LICENSE-DOCS.md` 为准，请勿把侧栏的「MIT license」理解为整个项目的授权。
 
 ## 第三方组件
 
