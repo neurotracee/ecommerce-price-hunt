@@ -188,9 +188,11 @@ for name, text in (("README.md", readme), ("README.en.md", readme_en),
     require(INSTALL_PROMPT in text, f"{name} 缺少「一句话安装」提示词")
 require(INSTALL_PROMPT in readme[:6000],
         "README.md 开头部分未给出「一句话安装」提示词")
-require("给文件，不给链接" in readme, "README.md 缺少「给文件，不给链接」说明")
-require("不要把下载链接发给 AI" in release_notes,
-        "RELEASE_NOTES.md 缺少「不要把下载链接发给 AI」说明")
+require("手动下载" in readme, "README.md 缺少「优先手动下载、链接可选」的说明")
+require("不要把下载链接发给 AI" not in readme,
+        "README.md 不应再使用「不要把下载链接发给 AI」这类一刀切表述")
+require("下载链接" in release_notes,
+        "RELEASE_NOTES.md 缺少安装方式说明（文件 / 链接）")
 require(INSTALL_PROMPT in read("scripts/pack.py"),
         "pack.py 生成的 INSTALL.txt 缺少「一句话安装」提示词")
 for name in ("docs/faq.md", "examples/prompt-examples.md", "docs/portability.md"):

@@ -66,9 +66,12 @@
 - GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
 - Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
 
-**第 2 步｜把下载到的 zip 文件本身直接发给 DSH**：拖进对话框，或作为附件上传。
+**第 2 步｜把 zip 交给 DSH**：最稳的是把上面下载到的**文件本身**直接拖进对话框，或作为附件上传；也可以把下载链接发给它、让它自己取（见下方说明）。
 
-> ⚠️ **不要把下载链接发给 AI，也不要让它跳转去下载。** 链接它不一定打得开，来回跳转和重试只会白白消耗时间与 token。**给文件，不给链接。**
+> 💡 **两条路都行：手动下载更稳，直接发链接也可以试。**
+> - **推荐**：自己把 zip 下载下来，再把**文件本身**发给 AI（拖进对话框，或作为附件上传）。
+> - **也可以**：直接把下载链接发给 AI，让它自己去取。能不能顺利取到，**取决于你用的 AI 宿主能力和当时的网络环境**——有的宿主能自己打开链接、把文件存下来；有的会卡在登录墙、跳转中转页、平台限流、需要人机验证，或者读不到页面内容。这种情况下反复重试，确实会白花时间和 token。**这因人而异，没有一刀切的结论。**
+> - 实操建议：优先给文件；手头不方便下载时，先发链接试试，一旦发现它卡住了（开始重复跳转、重复失败），就停下、改为手动下载再把文件发过去，别让它一直重试。
 
 **第 3 步｜对它说这一句**（可直接复制）：
 
@@ -329,8 +332,11 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 1. **Download the zip** (`ecommerce-price-hunt-v1.2.0.zip`):
    - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
    - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-2. **Send the zip file itself to DSH** — drag it into the chat, or attach it as a file.
-   > ⚠️ **Do not paste a download link into the chat and do not ask the AI to follow a link.** Links may not open; redirects and retries only waste time and tokens. **Send the file, not the link.**
+2. **Hand the zip to DSH** — the safest route is to drag the **file** you just downloaded into the chat, or attach it; alternatively paste the download link and let it fetch the file (see the note below).
+   > 💡 **Both routes work: downloading by hand is the safer bet, pasting the link is worth a try.**
+   > - **Recommended:** download the zip yourself and send the **file** (drag it in, or attach it).
+   > - **Also fine:** paste the download link and let the AI fetch it. Whether that works **depends on your AI host and your network at that moment** — some hosts open the link and save the file on their own; others stall on a login wall, a redirect interstitial, platform rate limiting, a human-verification check, or simply cannot read the page. Retrying in that situation really does burn time and tokens. **It varies from setup to setup; there is no one-size-fits-all rule.**
+   > - Rule of thumb: give the file when you can; if downloading is inconvenient, try the link first, and as soon as it starts looping (repeated redirects, repeated failures), stop and fall back to a manual download instead of letting it retry.
 3. Say this one line (copy as-is; the prompt is in Chinese because DSH is a Chinese-language client):
 
    > 帮我安装它到本地目录即可，我要把它添加进来。
