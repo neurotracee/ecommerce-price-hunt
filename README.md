@@ -1,11 +1,13 @@
 # 电商全网比价 Skill
 
-**中文** | [English](#english)
+|        |                     |
+| ------ | ------------------- |
+| **中文** | [English](#english) |
 
-> **项目定位（请先读这一段）**
-> 这是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 做的一个**附属功能的开源项目**：把「让 AI 自动完成商品/药品全网比价」这项能力，以一份可复用的 Skill（提示词 + 操作手册）形式沉淀下来，供 DSH go 及其他具备读屏能力的 AI Agent 参考使用。
-> 上游原仓库：**<https://github.com/ccch1mneyyy/dsh-go/>**
-> 上游 DSH go 是基于 **DeepSeek Harness** 的二次开发方向（其仓库标签含 `deepseek`、`deepseek-harness`）；本项目沿用的是同一类 Agent 能力语境，不含上游代码、也不隶属于上游。
+> **项目定位（请先读这一段）**  
+> 这是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 做的一个**附属功能的开源项目**：把「让 AI 自动完成商品/药品全网比价」这项能力，以一份可复用的 Skill（提示词 + 操作手册）形式沉淀下来，供 DSH go 及其他具备读屏能力的 AI Agent 参考使用。  
+> 上游原仓库：**<https://github.com/ccch1mneyyy/dsh-go/>**  
+> 上游 DSH go 是基于 **DeepSeek Harness** 的二次开发方向（其仓库标签含 `deepseek`、`deepseek-harness`）；本项目沿用的是同一类 Agent 能力语境，不含上游代码、也不隶属于上游。  
 > 本项目**不是 DSH go 的官方组件**，不隶属于上游项目，也不包含、不复制上游的任何代码；它是一个独立发布、独立授权的方法论参考包。
 
 **两个仓库（同一作者管理）**
@@ -29,28 +31,28 @@
 
 **本项目允许任何二次开发、商用或借用**，不需要付费、不需要申请、不需要等作者批准。
 
-| 内容 | 许可 | 说明 |
-| --- | --- | --- |
+| 内容                                                                                  | 许可               | 说明                          |
+| ----------------------------------------------------------------------------------- | ---------------- | --------------------------- |
 | 文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`、`NOTICE.md` 等所有非代码文本） | **CC BY-SA 4.0** | 署名 + 标明修改 + 相同方式共享，**允许商用** |
-| 代码与模板（`scripts/`、`assets/`） | **MIT** | 允许商用、允许闭源衍生，需保留版权与许可声明 |
+| 代码与模板（`scripts/`、`assets/`）                                                         | **MIT**          | 允许商用、允许闭源衍生，需保留版权与许可声明      |
 
 **两条硬要求，删掉任何一条都不合规：**
 
 1. **必须标注源仓库地址，且两个地址都要写**，同时说明二者由同一作者管理：
+
 
    ```
    https://github.com/neurotracee/ecommerce-price-hunt
    https://gitee.com/bio234/ecommerce-price-hunt
    （以上两个仓库由同一作者管理；GitHub 为主仓库，Gitee 为国内镜像）
    ```
-
 2. **必须注明是否修改**；改过的版本要写明「已修改」，且不得暗示原作者为你的版本背书。
 
-文档类衍生作品还须以 **CC BY-SA 4.0**（或兼容许可）发布——这是 ShareAlike 条款本身的要求。
+文档类衍生作品还须以 **CC BY-SA 4.0**（或兼容许可）发布——这是 ShareAlike 条款本身的要求。  
 完整条款、可复制的署名块、以及「地址写在哪里算数」：见 [`NOTICE.md`](NOTICE.md) 与 [`LICENSE-DOCS.md`](LICENSE-DOCS.md)。
 
-> ⚠️ **协议 ≠ 用途。** 授权放开的是版权层面的使用方式（能不能改、能不能商用、能不能再分发），**不是**对使用场景的免责。
-> 下文的「使用边界」与 `SKILL.md` 的硬规则**依然有效**：不得群控 / 刷单 / 抢购 / 批量爬取 / 抓取个人信息，
+> ⚠️ **协议 ≠ 用途。** 授权放开的是版权层面的使用方式（能不能改、能不能商用、能不能再分发），**不是**对使用场景的免责。  
+> 下文的「使用边界」与 `SKILL.md` 的硬规则**依然有效**：不得群控 / 刷单 / 抢购 / 批量爬取 / 抓取个人信息，  
 > 不得绕过验证码、风控、应用锁，比价结果不得用于药品广告、价格宣传、诊疗建议或对外发布的比价榜单。
 
 ---
@@ -74,12 +76,18 @@
 
 DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装完把路径告诉你。之后直接说「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」就能触发本 Skill。
 
+> ⭐ **用着顺手的话，回来点一颗 Star 就是最实在的回报**——不花钱，比打赏更有用，别人才搜得到。  
+> [GitHub 点 Star](https://github.com/neurotracee/ecommerce-price-hunt) · [Gitee 点 Star](https://gitee.com/bio234/ecommerce-price-hunt)　（赞赏码在文末，完全自愿）
+
 ---
 
-[![Release](https://img.shields.io/github/v/release/neurotracee/ecommerce-price-hunt?label=release)](https://github.com/neurotracee/ecommerce-price-hunt/releases)
-[![License: MIT](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/docs-CC%20BY--SA%204.0-orange.svg)](LICENSE-DOCS.md)
-[![DSH go](https://img.shields.io/badge/for-DSH%20go-2f6f4f)](https://github.com/ccch1mneyyy/dsh-go/)
+![Release](https://img.shields.io/github/v/release/neurotracee/ecommerce-price-hunt?label=release)
+
+![License: MIT](https://img.shields.io/badge/code-MIT-green.svg)
+
+![License: CC BY-SA 4.0](https://img.shields.io/badge/docs-CC%20BY--SA%204.0-orange.svg)
+
+![DSH go](https://img.shields.io/badge/for-DSH%20go-2f6f4f)
 
 > **开源协议（文字版，不依赖徽章图片）**：文档与提示词 **CC BY-SA 4.0**（署名 + 标明修改 + 相同方式共享，**允许商用**）；代码与模板 **MIT**。任何二次开发、商用、借用均可，但必须标注上面两个仓库地址并说明同一作者管理。详见 [`NOTICE.md`](NOTICE.md)。
 
@@ -87,10 +95,11 @@ DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装
 
 ## ⚠️ 免责声明（与 `SKILL.md` 保持一致，原文收录）
 
-> **用途声明**
+> **用途声明**  
 > 本项目是一份「比价作业指导书」：**只有提示词和操作手册，不含任何自动化脚本、破解工具或接口逆向代码**。设计给个人在自有设备上、用自己的账号、以人工浏览的方式核对价格使用。**禁止**用于群控、刷单、抢购、批量爬取、抓取个人信息、对外商业比价服务或价格宣传。本项目**不绕过**验证码、风控、应用锁或加密接口；遇到这些一律回到人工。仅供学习与个人研究，**不构成法律意见**，商用或大范围传播前请自行咨询律师。
 
 > **【药品专项】用途限制**（摘自 `SKILL.md`，目标为药品时强制生效）
+>
 > - 比价结果仅供个人参考；**不得用于药品广告、价格宣传、诊疗建议，也不得据此发布对外比价榜单**。
 > - 本技能的输出仅供个人参考：**不得用于药品广告、价格宣传、诊疗建议或对外发布的比价榜单**；药品购买与使用请遵医嘱或药师指导。
 > - 闸门三条件：国药准字 + 字母 + 8 位数字；有 OTC 或 RX 标识；剂型与通用名对得上。三者齐全才进表；查不到文号写「未核实」，不编造。
@@ -109,16 +118,16 @@ DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装
 
 ## 为什么需要一个 Skill，而不是让 Agent 自由发挥
 
-| Agent 常见误区 | 本 Skill 的约束 | 省下的是什么 |
-| --- | --- | --- |
-| 只看搜索首屏就报「最低价」 | 每平台至少 3–5 屏，多店对比；详情页继续滚；查不到就进结算页看规格 | 避免结论被推翻后整轮重来 |
-| 把标价当到手价 | 实付 = 标价 + 运费 − 可叠加券，券门槛必须写明 | 避免算错后重新采集全部平台 |
-| 不同规格直接比数字 | 统一换算元/克、元/ml、元/片；多件装先折单件；不同规格绝不混算 | 避免整张表作废 |
-| 药品/化妆品/保健食品混表 | 第 0 步先判品类，药品启用国药准字闸门，默认排除妆/食/健/消/械字号 | 避免输出不可用甚至有风险的结果 |
+| Agent 常见误区    | 本 Skill 的约束                            | 省下的是什么          |
+| ------------- | -------------------------------------- | --------------- |
+| 只看搜索首屏就报「最低价」 | 每平台至少 3–5 屏，多店对比；详情页继续滚；查不到就进结算页看规格    | 避免结论被推翻后整轮重来    |
+| 把标价当到手价       | 实付 = 标价 + 运费 − 可叠加券，券门槛必须写明            | 避免算错后重新采集全部平台   |
+| 不同规格直接比数字     | 统一换算元/克、元/ml、元/片；多件装先折单件；不同规格绝不混算      | 避免整张表作废         |
+| 药品/化妆品/保健食品混表 | 第 0 步先判品类，药品启用国药准字闸门，默认排除妆/食/健/消/械字号   | 避免输出不可用甚至有风险的结果 |
 | 把所有手册一次性塞进上下文 | 「按需加载」表：首次做某平台 / 读不到屏幕 / 换算 / 写报告，各读各的 | 直接减少每轮的输入 token |
-| 报告结构每次都重新设计 | 固定 10 章节 + 全量清单列定义 + 双屏自检清单 | 省掉反复改版式与反复截图 |
-| 读不到就猜一个数字 | 不猜数据；读不到写进「局限」；推断与实测分开写 | 避免幻觉引发的信任成本 |
-| 遇到应用锁/验证码还硬闯 | 一律 `handoff` 交还用户，不绕过 | 避免卡死、避免违规 |
+| 报告结构每次都重新设计   | 固定 10 章节 + 全量清单列定义 + 双屏自检清单            | 省掉反复改版式与反复截图    |
+| 读不到就猜一个数字     | 不猜数据；读不到写进「局限」；推断与实测分开写                | 避免幻觉引发的信任成本     |
+| 遇到应用锁/验证码还硬闯  | 一律 `handoff` 交还用户，不绕过                  | 避免卡死、避免违规       |
 
 一句话：**把踩过的坑写成闸门，把重复劳动写成模板，把长手册拆成按需加载**。这是本项目对「提升 AI 能力 / 减少 token 与时间浪费」的全部主张，不做效果数字的承诺。
 
@@ -178,6 +187,7 @@ ecommerce-price-hunt/
 ├── assets/report-skeleton.html    # 只含比价章节的骨架（示例数据全部虚构）
 ├── docs/                          # 设计说明、平台移植、FAQ
 ├── examples/                      # 触发话术与一次任务的流程示例（无真实数据）
+├── images/wechat-donate.png       # README 用的微信赞赏码（不打进安装包）
 ├── scripts/                       # 结构校验、打包、一键同步发布
 └── .github/                       # Issue / PR 模板、CI 校验
 ```
@@ -231,19 +241,41 @@ ecommerce-price-hunt/
 
 ---
 
+## ⭐ 支持本项目（点个 Star + 赞赏）
+
+**点一颗 Star，比打赏更有用。**
+
+不想花钱完全没问题：到仓库点一颗 **Star** 就是最好的支持——Star 多了，别人才搜得到，作者也更有动力继续更新平台手册和坑位记录。两个仓库都可以点，点一个就够：
+
+- GitHub 点 Star：<https://github.com/neurotracee/ecommerce-price-hunt>
+- Gitee 点 Star：<https://gitee.com/bio234/ecommerce-price-hunt>
+
+如果这个 Skill 确实帮你少烧了 token、少返工了几轮，也可以扫码请作者喝杯奶茶 🧋——**完全自愿**，不打赏一样免费、功能不缺、更新照常。
+
+![微信赞赏码](images/wechat-donate.png)
+
+> - **赞赏是纯粹的个人自愿打赏**，不是购买、不是订阅、不附带任何服务承诺，也不影响授权：本项目仍按上面的 CC BY-SA 4.0 / MIT 授权，**商用、二次开发、借用都不需要付费，也不需要经过作者同意**。
+> - 想把二维码存下来：在图片上右键「图片另存为」即可（仓库内路径 `images/wechat-donate.png`）。
+> - 若图片没显示（部分镜像/离线阅读器会屏蔽外链图片），到仓库页面 `images/wechat-donate.png` 直接打开即可。
+
+---
+
 **再次提示**：本项目仅供学习与研究参考，不构成法律、用药、购买或投资建议。完整免责声明见本文开头与 `SKILL.md`。
 
 ---
 
 # English
 
-[中文](#电商全网比价-skill) | **English**
+|                     |             |
+| ------------------- | ----------- |
+| [中文](#电商全网比价-skill) | **English** |
 
-> **Positioning — read this first**
-> This is an **open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/)**. It packages the "let an AI automatically compare product / medicine prices across stores" capability as a reusable Skill (prompts + operating playbooks), for DSH go and other AI Agents with screen-reading ability.
-> Upstream repository: **<https://github.com/ccch1mneyyy/dsh-go/>**
-> Upstream DSH go follows the **DeepSeek Harness** development direction (its repository topics include `deepseek` and `deepseek-harness`). This project shares that Agent-capability context but contains no upstream code and is not affiliated with it.
+> **Positioning — read this first**  
+> This is an **open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/)**. It packages the "let an AI automatically compare product / medicine prices across stores" capability as a reusable Skill (prompts + operating playbooks), for DSH go and other AI Agents with screen-reading ability.  
+> Upstream repository: **<https://github.com/ccch1mneyyy/dsh-go/>**  
+> Upstream DSH go follows the **DeepSeek Harness** development direction (its repository topics include `deepseek` and `deepseek-harness`). This project shares that Agent-capability context but contains no upstream code and is not affiliated with it.  
 > This project is **not an official DSH go component**, contains or copies **no upstream code**, and is independently published under its own license.
+
 
 **Two repositories, one author**
 
@@ -304,6 +336,9 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
    > 帮我安装它到本地目录即可，我要把它添加进来。
 
    *("Install it into my local directory for me — I want to add it in.")* DSH unzips it into the local skills folder and reports the path.
+
+> ⭐ **If it works well for you, a Star is the most useful way to say thanks** — it costs nothing, helps more people find the project, and beats a tip.
+> [Star on GitHub](https://github.com/neurotracee/ecommerce-price-hunt) · [Star on Gitee](https://gitee.com/bio234/ecommerce-price-hunt)　(tip QR is at the end of this section — entirely optional)
 
 > **License (plain text, in case badge images do not load)**: documentation and prompts are **CC BY-SA 4.0** (attribution, indicate changes, share-alike, **commercial use allowed**); code and templates are **MIT**. Any secondary development, commercial use or reuse is allowed, provided you cite **both** repository URLs above and state that one author manages them. See [`NOTICE.md`](NOTICE.md).
 
@@ -371,8 +406,10 @@ NOTICE.md                    license & attribution rules, DSH go provenance
 references/*.md              on-demand playbooks (platforms, screen reading, pricing math, report spec)
 assets/report-skeleton.html  section skeleton only; all sample numbers are fictional
 docs/ examples/ scripts/     design notes, usage examples, validation / packaging / publishing
+images/wechat-donate.png     the WeChat tip QR shown in this README (not packed into the zip)
 .github/                     issue & PR templates, CI validation
 ```
+
 
 ## Prohibited uses
 
@@ -400,6 +437,25 @@ Platform observations, pitfall corrections, translations and documentation impro
 - This is an **open-source project** (the documentation meets the CC definition of a free cultural work; the code meets OSI's MIT). Earlier versions used CC BY-NC-SA 4.0 with a non-commercial clause; from v1.2.0 it is CC BY-SA 4.0 with commercial use explicitly allowed.
 
 Upstream [DSH go](https://github.com/ccch1mneyyy/dsh-go/) is AGPL-3.0. This project contains none of its code, is an independent work under its own license, and does not speak for the upstream project.
+
+---
+
+## ⭐ Support this project (star it + optional tip)
+
+**A star beats a tip.**
+
+If you don't feel like paying anything, that's completely fine: starring the repository is the best support — more stars mean more people find the project, and it keeps the author motivated to update the platform playbooks and pitfall notes. Either repository will do; one star is enough:
+
+- Star on GitHub: <https://github.com/neurotracee/ecommerce-price-hunt>
+- Star on Gitee: <https://gitee.com/bio234/ecommerce-price-hunt>
+
+If this Skill genuinely saved you tokens and re-runs, you can also scan the QR code to buy the author a bubble tea 🧋 — **entirely voluntary**. No tip means no difference: it stays free, nothing is locked, and updates keep coming.
+
+![WeChat tip QR code](images/wechat-donate.png)
+
+> - **A tip is a purely voluntary personal gift.** It is not a purchase, not a subscription, carries no service commitment, and does not affect the license: the project remains **CC BY-SA 4.0 / MIT**, and **commercial use, secondary development and reuse never require payment or the author's permission**.
+> - To keep the QR code: right-click the image and choose "Save image as" (path in the repository: `images/wechat-donate.png`).
+> - If the image does not render (some mirrors and offline readers block remote images), open `images/wechat-donate.png` directly from the repository page.
 
 ---
 
