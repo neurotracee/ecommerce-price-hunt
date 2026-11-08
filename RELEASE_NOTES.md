@@ -1,10 +1,40 @@
-# v1.1.0 · ecommerce-price-hunt
+# v1.2.0 · ecommerce-price-hunt
+
+**中文** | [English](#english)
 
 > **这是为 [DSH go](https://github.com/ccch1mneyyy/dsh-go/) 做的一个附属功能的开源项目。**
 > 上游原仓库：<https://github.com/ccch1mneyyy/dsh-go/>
 > 本项目**不是** DSH go 的官方组件，不隶属于上游项目，也不包含、不复制上游的任何代码；独立发布、独立授权。
 
-首个公开发布版本。把「让 AI 自动完成商品/药品全网比价」沉淀为一份可复用的 Skill：品类闸门、统一单价口径、按需加载的读屏手册、药品专项规则，以及固定结构的双屏 HTML 报告。目标是减少 Agent 的返工、误判与不必要的上下文消耗。
+## 本次发布：授予更开放的授权，并明确署名规范
+
+- **文档与提示词：CC BY-SA 4.0**（此前为 CC BY-NC-SA 4.0）。**去掉非商业条款，明确允许商用**。
+- **代码与模板：MIT**。
+- **任何二次开发、商用或借用均可**，但必须遵守 `NOTICE.md` 的署名规范。
+
+## 作者与制作方式
+
+- **作者在创建本仓库时为初中生。**
+- **Skill 提示词**由 **DSH GO 的 deepseek 作者自购 API 的 DeepSeek V4.1 Flash 1017 版**，根据作者的反馈与实际模型表现处理并正式优化，最终总结归纳生成。
+- **开源编写与仓库构建**：由 **腾讯 WorkBuddy 的 Hy4** 与 **DeepSeek V4.1 Flash 1017 版** 分别负责（部分工作有具体分工）。
+- **作者负责**：指令、监督、反馈与创意想法。
+- **仓库首个构建日期：2026 年 11 月。**
+
+## 授权与署名规范（硬要求）
+
+**两个仓库地址（同一作者管理，转载/衍生必须两个都写）：**
+
+```
+https://github.com/neurotracee/ecommerce-price-hunt
+https://gitee.com/bio234/ecommerce-price-hunt
+（以上两个仓库由同一作者管理；GitHub 为主仓库，Gitee 为国内镜像）
+```
+
+1. **必须署名并标注上述两个仓库地址**，并说明二者由同一作者管理；
+2. **必须注明是否修改**，且不得暗示原作者为你的版本背书；
+3. 文档类衍生作品须以 **CC BY-SA 4.0**（或兼容许可）发布（ShareAlike）。
+
+> ⚠️ **协议 ≠ 用途。** 授权允许商用，但下文用途限制与 `SKILL.md` 硬规则**依然有效**，不因商用授权而失效。
 
 ## ⚠️ 免责声明（与 `SKILL.md` 一致，原文收录）
 
@@ -22,9 +52,9 @@
 
 **不用 clone 仓库，不用敲命令，也不用翻到别的页面或章节找说明。**
 
-1. **直接把压缩包下载下来**（`ecommerce-price-hunt-v1.1.0.zip`）：
-   - GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
-   - Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+1. **直接把压缩包下载下来**（`ecommerce-price-hunt-v1.2.0.zip`）：
+   - GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
+   - Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
 2. **把下载到的 zip 文件本身直接发给 DSH**：拖进对话框，或作为附件上传。
    **不要把下载链接发给 AI，也不要让它跳转去下载**——链接不一定打得开，来回跳转和重试只会白白消耗时间与 token。**给文件，不给链接。**
 3. 对它说这一句（可直接复制）：
@@ -45,7 +75,8 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - `SKILL.md`：品类判定、采集流程、口径、药品专项、硬规则、按需加载表、交付检查
 - `references/`：平台实录、读屏坑与对策、单价/实付口径、报告章节与双屏自检
 - `assets/report-skeleton.html`：只含比价章节的 HTML 骨架（示例数据全部虚构）
-- `README.md` / `README.en.md` / `NOTICE.md`：项目定位、DSH go 出处、完整免责声明、归属说明
+- `README.md`（中英双语，中文在上）/ `README.en.md`（指向英文段）/ `NOTICE.md`（授权与署名规范）
+- `LICENSE`（MIT）/ `LICENSE-DOCS.md`（CC BY-SA 4.0 全文）
 - `docs/` / `examples/`：设计说明、宿主移植、FAQ、触发话术与流程示例
 - 开源治理文件：CONTRIBUTING / CODE_OF_CONDUCT / SECURITY / CHANGELOG / CITATION.cff / Issue 与 PR 模板 / CI 校验
 
@@ -53,13 +84,110 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 
 ## 许可
 
-- 代码与模板（`assets/`、`scripts/`）：MIT
-- 文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`）：CC BY-NC-SA 4.0（署名 - 非商业性使用 - 相同方式共享）；商业用途需另行获得书面授权
-- 平台侧栏自动识别的 **MIT 仅覆盖代码与模板**；文档与提示词为非商业的 CC BY-NC-SA 4.0，以 `LICENSE-DOCS.md` 为准，请勿把侧栏的 MIT 当成整个项目的授权
-- 因含 NC 条款，本项目为源码公开 / 非商业自由使用，而非 OSI 认证的开源软件
+| 内容 | 许可 |
+| --- | --- |
+| 文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`、`NOTICE.md`） | **CC BY-SA 4.0**（署名 + 标明修改 + 相同方式共享，允许商用） |
+| 代码与模板（`scripts/`、`assets/`） | **MIT** |
 
-上游 DSH go 采用 AGPL-3.0；本项目为独立作品、独立授权，不含其代码，也不代表上游立场。
+- 平台侧栏自动识别的 **MIT 仅覆盖代码与模板**，请勿当成整个项目的授权。
+- 必须标注两个仓库地址并说明同一作者管理，写法见 `NOTICE.md`。
+- 上游 DSH go 采用 AGPL-3.0；本项目为独立作品、独立授权，不含其代码，也不代表 upstream 立场。
 
 ---
 
-**仅供个人学习与研究。完整免责声明见仓库 `README.md` 开头与 `SKILL.md`。**
+**仅供学习与研究参考。完整免责声明见仓库 `README.md` 开头与 `SKILL.md`。**
+
+---
+
+# English
+
+[中文](#v120--ecommerce-price-hunt) | **English**
+
+> **This is an open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/).**
+> Upstream repository: <https://github.com/ccch1mneyyy/dsh-go/>
+> This is **not** an official DSH go component, is not affiliated with the upstream project, and contains or copies **no upstream code**. Independently published, independently licensed.
+
+## This release: a more open license, plus explicit attribution rules
+
+- **Documentation and prompts: CC BY-SA 4.0** (previously CC BY-NC-SA 4.0). **The non-commercial clause is gone; commercial use is explicitly allowed.**
+- **Code and templates: MIT.**
+- **Any secondary development, commercial use or reuse is allowed**, subject to the attribution rules in `NOTICE.md`.
+
+## Author & how it was made
+
+- **The author was a junior high school student when this repository was created.**
+- **The Skill prompts** were processed and formally optimised by **the DeepSeek V4.1 Flash 1017 build, using an API key purchased by the DSH GO deepseek author**, based on the author's feedback and the model's actual behaviour, then summarised and consolidated.
+- **Open-source writing and repository construction**: handled respectively by **Hy4 on Tencent WorkBuddy** and **DeepSeek V4.1 Flash 1017** (the roles were partly and specifically divided).
+- **The author was responsible for** instructions, supervision, feedback and creative input.
+- **First repository build date: November 2026.**
+
+## License & attribution (hard requirements)
+
+**Both repository URLs — mandatory in any redistribution or derivative (same author manages both):**
+
+```
+https://github.com/neurotracee/ecommerce-price-hunt
+https://gitee.com/bio234/ecommerce-price-hunt
+(both repositories are managed by the same author; GitHub is the main repo, Gitee the mainland-China mirror)
+```
+
+1. **Credit the author and cite both URLs above**, stating that one author manages them;
+2. **State whether you modified it**, and never imply the original author endorses your version;
+3. Derivative documentation must be released under **CC BY-SA 4.0** (or a compatible license) — ShareAlike.
+
+> ⚠️ **A license is not permission for any use case.** Commercial use is licensed, but the usage restrictions below and the hard rules in `SKILL.md` **remain in force**.
+
+## ⚠️ Disclaimer (mirrors `SKILL.md`; the Chinese text there is authoritative)
+
+> **Statement of purpose**
+> This project is a **comparison work instruction**: prompts and operating playbooks only, with **no automation scripts, no cracking tools and no reverse-engineered API code**. It is designed for an individual using their own device, their own account, and human-paced browsing. **Do not** use it for device farms, fake orders, flash-sale bots, bulk scraping, harvesting personal data, commercial price-comparison services, or price advertising. It does **not** bypass CAPTCHAs, risk controls, app locks or encrypted endpoints — hand control back to the user instead. For learning and personal research only; **not legal advice**. Consult a lawyer before commercial use or wide distribution.
+
+> **Medicine-specific use restriction** (from `SKILL.md`, mandatory when the target is a medicine)
+> - Results are **for personal reference only**; **they must not be used for medicine advertising, price promotion, diagnostic or treatment advice, or for publishing public price-comparison rankings**.
+> - Purchasing and using medicines must follow a physician's or pharmacist's guidance.
+> - Gate: an NMPA approval number (国药准字 + letter + 8 digits), an OTC/RX marking, and a dosage form matching the generic name — all three must be present; unverifiable approval numbers are recorded as "unverified", never invented.
+
+> This project provides a method only. It is not medical, purchasing or investment advice. Prices are time-sensitive; the author accepts no liability for any loss arising from its use. Comply with each platform's terms of service and applicable law.
+
+## Install: download the zip → hand it to DSH → one sentence
+
+1. **Download the zip** (`ecommerce-price-hunt-v1.2.0.zip`):
+   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
+   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
+2. **Send the zip file itself to DSH** — drag it into the chat or attach it.
+   **Do not paste the download link and do not ask the AI to follow a link** — links may not open, and redirects and retries only burn time and tokens. **Send the file, not the link.**
+3. Say this one line:
+
+   > 帮我安装它到本地目录即可，我要把它添加进来。
+
+Manual install (rarely needed, only for other hosts):
+
+```bash
+mkdir -p ~/.dsh/skills
+cp -r ecommerce-price-hunt ~/.dsh/skills/
+```
+
+## What is inside
+
+`SKILL.md` (category gate, collection flow, pricing rules, medicine gate, hard rules, on-demand loading),
+`references/` (platform playbooks, screen reading, pricing math, report spec), `assets/report-skeleton.html`
+(fictional sample data only), `README.md` (bilingual), `NOTICE.md` (license & attribution rules),
+`LICENSE` (MIT), `LICENSE-DOCS.md` (CC BY-SA 4.0 full text), `docs/`, `examples/`, and the usual
+governance files (CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, CHANGELOG, CITATION.cff, issue/PR templates, CI).
+
+See [CHANGELOG.md](CHANGELOG.md) for the full change list.
+
+## License
+
+| Content | License |
+| --- | --- |
+| Documentation and prompts (`README*`, `SKILL.md`, `references/`, `docs/`, `examples/`, `NOTICE.md`) | **CC BY-SA 4.0** (attribution + indicate changes + share-alike; commercial use allowed) |
+| Code and templates (`scripts/`, `assets/`) | **MIT** |
+
+- The **MIT** label shown in the platform sidebar covers **code and templates only**; it is not the license of the whole project.
+- Citing both repository URLs and stating that one author manages them is mandatory — wording in `NOTICE.md`.
+- Upstream DSH go is AGPL-3.0. This project is an independent work under its own license, contains none of its code, and does not speak for the upstream project.
+
+---
+
+For learning and research reference only. Full disclaimer at the top of `README.md` and in `SKILL.md`.

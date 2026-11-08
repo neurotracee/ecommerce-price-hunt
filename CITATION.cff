@@ -10,13 +10,14 @@ type: software
 authors:
   - name: "neurotracee"
     website: "https://github.com/neurotracee"
-version: 1.1.0
+version: 1.2.0
 date-released: 2026-11-08
 repository-code: "https://github.com/neurotracee/ecommerce-price-hunt"
+repository-artifact: "https://gitee.com/bio234/ecommerce-price-hunt"
 url: "https://github.com/ccch1mneyyy/dsh-go/"
 license:
   - MIT
-  - CC-BY-NC-SA-4.0
+  - CC-BY-SA-4.0
 keywords:
   - ai-agent
   - skill
@@ -28,7 +29,11 @@ keywords:
   - deepseek-harness
   - ecommerce
 notes: >-
-  Code/templates are MIT; documentation and prompts are CC BY-NC-SA 4.0.
+  Code/templates are MIT; documentation and prompts are CC BY-SA 4.0
+  (attribution, indicate changes, share-alike; commercial use allowed).
+  Any secondary development or commercial use is permitted provided both
+  repository URLs are cited and the two repositories are described as
+  managed by the same author.
   Independent work, not an official DSH go component; contains no upstream code.
   For personal reference only; not for medicine advertising, price promotion,
   treatment advice, or published price rankings.

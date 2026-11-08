@@ -127,17 +127,56 @@ readme_en = read("README.en.md")
 notice = read("NOTICE.md")
 release_notes = read("RELEASE_NOTES.md")
 
-for name, text in (("README.md", readme), ("README.en.md", readme_en), ("NOTICE.md", notice)):
+for name, text in (("README.md", readme), ("NOTICE.md", notice), ("RELEASE_NOTES.md", release_notes)):
     require(DSH_GO_URL in text, f"{name} 缺少 DSH go 原仓库地址")
 for name, text in (("README.md", readme), ("SKILL.md", skill), ("RELEASE_NOTES.md", release_notes)):
     require(DISCLAIMER_ZH in text, f"{name} 缺少药品专项用途限制（免责声明）")
-require(DISCLAIMER_EN in readme_en, "README.en.md 缺少英文版免责声明")
-require("附属" in readme[:1200], "README.md 开头未声明「DSH go 附属功能」")
-require(("ancillary" in readme_en[:1200] or "附属" in readme_en[:1200]),
-        "README.en.md 开头未声明 ancillary project")
+require(DISCLAIMER_EN in readme, "README.md 英文部分缺少英文版免责声明")
+require("附属" in readme[:1500], "README.md 开头未声明「DSH go 附属功能」")
+require("ancillary" in readme, "README.md 英文部分未声明 ancillary project")
 require("非官方" in notice or "不是" in notice, "NOTICE.md 缺少非官方/独立作品声明")
-require("CC BY-NC-SA 4.0" in readme, "README.md 缺少文档许可说明")
+require("CC BY-SA 4.0" in readme, "README.md 缺少文档许可说明")
 require("MIT" in readme, "README.md 缺少代码许可说明")
+
+
+# ------------------------------------- 5a. dual-repo attribution (mandatory)
+GH_REPO = "https://github.com/neurotracee/ecommerce-price-hunt"
+GITEE_REPO = "https://gitee.com/bio234/ecommerce-price-hunt"
+for name, text in (("README.md", readme), ("NOTICE.md", notice), ("RELEASE_NOTES.md", release_notes),
+                   ("LICENSE", read("LICENSE")), ("LICENSE-DOCS.md", read("LICENSE-DOCS.md"))):
+    require(GH_REPO in text, f"{name} 缺少 GitHub 源仓库地址")
+    require(GITEE_REPO in text, f"{name} 缺少 Gitee 源仓库地址")
+for name, text in (("README.md", readme), ("NOTICE.md", notice), ("RELEASE_NOTES.md", release_notes)):
+    require("同一作者" in text or "same author" in text,
+            f"{name} 未说明两个仓库由同一作者管理")
+require("注明是否修改" in notice, "NOTICE.md 缺少「注明是否修改」要求")
+require("ShareAlike" in notice or "相同方式共享" in notice, "NOTICE.md 缺少 ShareAlike 说明")
+
+
+# ------------------------------------------- 5a2. author & build statement
+for name, text in (("README.md", readme), ("RELEASE_NOTES.md", release_notes)):
+    require("初中生" in text, f"{name} 缺少「作者创建仓库时为初中生」声明")
+    require("2026 年 11 月" in text, f"{name} 缺少仓库首个构建日期（精确到月份）")
+    require("DeepSeek V4.1 Flash 1017" in text, f"{name} 缺少提示词所用模型版本")
+    require("Hy4" in text, f"{name} 缺少 WorkBuddy Hy4 贡献说明")
+require("协议 ≠ 用途" in readme or "协议≠用途" in readme,
+        "README.md 缺少「协议≠用途」提示")
+require("协议 ≠ 用途" in skill or "协议≠用途" in skill,
+        "SKILL.md 缺少「协议≠用途」提示")
+
+
+# ------------------------------------------- 5a3. bilingual anchor layout
+require("[English](#english)" in readme, "README.md 缺少 English 锚点跳转")
+require("^# English" in readme or "\n# English" in readme, "README.md 英文部分缺少一级标题")
+require(("\n# English" in readme) and ("[中文](#" in readme), "README.md 英文部分缺少回跳中文的锚点")
+_en_idx = readme.find("\n# English")
+require(_en_idx > len(readme) * 0.25,
+        "README.md 英文部分应放在中文内容之后（中文在上、英文在下）")
+require("允许商用" in readme, "README.md 未明确「允许商用」")
+for _line in readme.splitlines():
+    if "CC BY-NC-SA" in _line:
+        require(("此前版本" in _line) or ("Earlier versions" in _line),
+                "README.md 仍在用 CC BY-NC-SA 作为当前授权（应已改为 CC BY-SA 4.0）")
 
 
 # ------------------------------------------- 5b. one-sentence install flow
@@ -145,8 +184,8 @@ INSTALL_PROMPT = "帮我安装它到本地目录即可，我要把它添加进�
 for name, text in (("README.md", readme), ("README.en.md", readme_en),
                    ("RELEASE_NOTES.md", release_notes)):
     require(INSTALL_PROMPT in text, f"{name} 缺少「一句话安装」提示词")
-require(INSTALL_PROMPT in readme[:2500],
-        "README.md 开头第一屏未给出「一句话安装」提示词")
+require(INSTALL_PROMPT in readme[:6000],
+        "README.md 开头部分未给出「一句话安装」提示词")
 require("给文件，不给链接" in readme, "README.md 缺少「给文件，不给链接」说明")
 require("不要把下载链接发给 AI" in release_notes,
         "RELEASE_NOTES.md 缺少「不要把下载链接发给 AI」说明")
@@ -164,8 +203,11 @@ require(lic.rstrip().endswith("SOFTWARE."),
 require("CC BY-NC-SA" not in lic,
         "LICENSE 不应混入文档许可说明（会破坏平台对 MIT 的自动识别）")
 require("MIT 仅覆盖代码" in readme, "README.md 缺少「平台 MIT 仅覆盖代码」提示")
-require("code and templates only" in readme_en,
-        "README.en.md 缺少「MIT only covers code」提示")
+require("code and templates only" in readme,
+        "README.md 英文部分缺少「MIT only covers code」提示")
+require("CC BY-SA 4.0" in read("LICENSE-DOCS.md"), "LICENSE-DOCS.md 未声明 CC BY-SA 4.0")
+require("Attribution-ShareAlike 4.0 International" in read("LICENSE-DOCS.md"),
+        "LICENSE-DOCS.md 缺少 CC BY-SA 4.0 官方法律文本")
 require("deepseek-harness" in read("CITATION.cff"),
         "CITATION.cff 缺少 deepseek-harness 关键词")
 require("DeepSeek Harness" in notice, "NOTICE.md 缺少上游 DeepSeek Harness 说明")

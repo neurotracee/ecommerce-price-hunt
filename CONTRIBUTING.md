@@ -39,7 +39,7 @@
 ## 提交内容的许可
 
 - 你提交到 `assets/`、`scripts/` 的内容，视为同意按 **MIT** 授权。
-- 你提交到文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`）的内容，视为同意按 **CC BY-NC-SA 4.0** 授权，且同样方式共享。
+- 你提交到文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`）的内容，视为同意按 **CC BY-SA 4.0** 授权（署名 + 标明修改 + 相同方式共享）。
 - 请勿提交你无权按上述许可授权的材料（例如从平台页面整段复制的说明、第三方文章内容）。
 
 ## 行为准则

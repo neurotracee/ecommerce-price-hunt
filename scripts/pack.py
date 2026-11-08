@@ -80,7 +80,26 @@ INSTALL_TXT = f"""ecommerce-price-hunt v{VERSION}
 作者不对因使用本项目产生的任何直接或间接损失负责。仅供个人学习与研究，
 不构成法律意见，商用前请咨询律师。
 
-许可：代码/模板 MIT；文档/提示词 CC BY-NC-SA 4.0（非商业、相同方式共享）。
+许可（任何二次开发、商用或借用均可，但必须署名）
+----------------------------------------------
+文档/提示词：CC BY-SA 4.0（允许商用；须署名并标注源仓库地址、注明是否修改、相同方式共享）。
+代码/模板：MIT。
+
+必须标注以下两个仓库地址，并说明二者由同一作者管理：
+    https://github.com/neurotracee/ecommerce-price-hunt
+    https://gitee.com/bio234/ecommerce-price-hunt
+    （以上两个仓库由同一作者管理；GitHub 为主仓库，Gitee 为国内镜像）
+
+协议 ≠ 用途：授权放开的是版权层面的使用方式，上面列出的用途限制依然有效，
+不因允许商用而失效。完整条款见 NOTICE.md 与 LICENSE-DOCS.md。
+
+作者与制作方式
+--------------
+作者创建本仓库时为初中生；Skill 提示词由 DSH GO 的 deepseek 作者自购 API 的
+DeepSeek V4.1 Flash 1017 版，根据作者反馈与实际模型表现处理并正式优化，最终总结归纳生成；
+开源编写与仓库构建由腾讯 WorkBuddy 的 Hy4 与 DeepSeek V4.1 Flash 1017 版分别负责
+（部分工作有具体分工）；作者负责指令、监督、反馈与创意想法。
+仓库首个构建日期：2026 年 11 月。
 """
 
 files: list[Path] = []
