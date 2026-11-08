@@ -61,10 +61,10 @@
 
 **不用 clone 仓库，不用敲命令，也不用在本页翻上翻下找说明。**
 
-**第 1 步｜直接把压缩包下载下来**（技能安装包 `ecommerce-price-hunt-v1.2.0.zip`）：
+**第 1 步｜直接把压缩包下载下来**（技能安装包 `ecommerce-price-hunt-v1.3.0.zip`）：
 
-- GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-- Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
+- GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+- Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
 
 **第 2 步｜把 zip 交给 DSH**：最稳的是把上面下载到的**文件本身**直接拖进对话框，或作为附件上传；也可以把下载链接发给它、让它自己取（见下方说明）。
 
@@ -170,6 +170,7 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - 前 N 名深挖（默认 3）：发货地、默认快递、发货承诺、到货预估，能问客服就问并保留原话。
 - 药品专项：只认「国药准字 + OTC/RX」，默认排除妆字号 / 食字号 / 健字号 / 消字号 / 械字号。
 - 交付报告：单文件 HTML，手机 2.2:1 与笔记本 1.5:1 双屏分别自检。
+- **版本自检**：每次任务交付后，在结尾追加一行版本状态（当前 / 最新 / 是否落后）；落后时说明差距、用一两句话讲清改了什么，并问你是否一键升级（规则见 `SKILL.md` 末尾）。
 
 ## 目录结构
 
@@ -227,6 +228,8 @@ ecommerce-price-hunt/
 ## Release 与版本
 
 每个版本都会发布一个**可直接放进技能目录的 zip**，并在 Release 正文里重复作者声明、授权规范与完整免责声明。Gitee 镜像仓库同步发布。版本号遵循语义化版本，`SKILL.md` 的行为变更会写进 `CHANGELOG.md`。
+
+装好之后，技能会**自己在每次任务结尾报告版本**（当前版本 · 远端最新 · 是否最新）；如果落后，会顺带说明差距与主要改动，并问你要不要升级——**检查永远放在任务做完之后**，不会占用比价本身的时间与 token。
 
 ## 贡献
 
@@ -333,9 +336,9 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 
 **No cloning, no terminal commands, no jumping up and down this page.**
 
-1. **Download the zip** (`ecommerce-price-hunt-v1.2.0.zip`):
-   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
+1. **Download the zip** (`ecommerce-price-hunt-v1.3.0.zip`):
+   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
 2. **Hand the zip to DSH** — the safest route is to drag the **file** you just downloaded into the chat, or attach it; alternatively paste the download link and let it fetch the file (see the note below).
    > 💡 **Both routes work: downloading by hand is the safer bet, pasting the link is worth a try.**
    > - **Recommended:** download the zip yourself and send the **file** (drag it in, or attach it).
@@ -433,6 +436,8 @@ Recommended ceiling: ≤30 links and ≤3 deeply-examined platforms per task. Re
 ## Releases
 
 Each release ships a ready-to-install zip and repeats the author statement, the license & attribution rules and the full disclaimer in its notes. Mirrored on Gitee. See [CHANGELOG.md](CHANGELOG.md).
+
+Once installed, the Skill reports its own version at the end of every task (current · latest · up to date or not). If it is behind, it states the gap and a one-or-two-sentence summary of what changed, then asks whether to upgrade — **the check always runs after the task is delivered**, so it never eats the time or tokens spent on the comparison itself.
 
 ## Contributing
 

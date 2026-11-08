@@ -1,5 +1,6 @@
 ---
 name: ecommerce-price-hunt
+version: 1.3.0
 description: 当用户要求针对某个商品或药品做全网比价——例如说「开始针对某某商品进行全网比价」「到各大电商平台看看哪个最划算」「查一下这个药各平台多少钱」并要求价格、性价比、发货地或时效，或要 HTML 比价报告时使用。通用商品走通用流程；目标为药品时自动启用药字号闸门，只认国药准字，排除妆字号/食字号/健字号/消字号/械字号。也用于同一商品多平台比价与最低价前 N 名深挖。
 ---
 
@@ -12,6 +13,7 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 > 用途限制与完整免责声明见仓库 `README.md` 开头；本文件【药品专项】中的用途限制为**强制约束**，不得删改。
 > 授权：文档/提示词 CC BY-SA 4.0、代码/模板 MIT，**任何二次开发、商用、借用均可**，但必须标注两个仓库地址并说明同一作者管理（见 `NOTICE.md`）。
 > **协议 ≠ 用途**：授权放开的是版权层面的使用方式，**不是**对使用场景的免责；本文件下方的硬规则与【药品专项】限制不因商用授权而失效。
+> **本文件对应版本：v1.3.0。** 每次输出都要在结尾带上当前版本并做一次更新检查（见文末「版本自检与升级提示」，只在任务交付后执行，不占用采集 token）。
 
 ## 第 0 步：品类判定（决定后面用哪套规则）
 先判定目标属于哪一类，再选规则，别先搜后想：
@@ -100,3 +102,45 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 - `assets/report-skeleton.html`：只含比价章节骨架，样式与脚本可贴宿主 html 技能的写法。
 - `docs/portability.md`：宿主能力映射与无 html 技能时的替代做法（**本技能文件之外的移植说明，不需要在每次任务里加载**）。
 - `README.md`：项目定位、DSH go 出处、完整免责声明（首次安装时读一次即可）。
+
+---
+
+## 关于本项目（简版声明，完整版见仓库 `README.md` / `NOTICE.md`）
+
+- 这是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 做的**附属功能开源项目**：非官方组件、不含上游代码、独立发布独立授权。
+- 作者创建本仓库时为**初中生**；本技能提示词由 **DSH GO 的 deepseek 作者自购 API 的 DeepSeek V4.1 Flash 1017 版**，据作者反馈与实际模型表现处理优化后总结生成；开源编写与仓库构建由**腾讯 WorkBuddy 的 Hy4** 与 **DeepSeek V4.1 Flash 1017 版**分别负责；作者负责指令、监督、反馈与创意。**首个构建：2026 年 11 月。**
+- 许可：文档/提示词 **CC BY-SA 4.0**、代码/模板 **MIT**；商用、二次开发、借用均可，但须**同时标注下面两个仓库地址**并说明由同一作者管理。
+
+## 版本自检与升级提示（每次任务结束都做）
+
+**当前版本：v1.3.0** ｜ 与同目录 `VERSION` 不一致时以 `VERSION` 为准，并在结尾注明「本文件与 VERSION 不一致」
+**仓库**：GitHub <https://github.com/neurotracee/ecommerce-price-hunt> ｜ Gitee <https://gitee.com/bio234/ecommerce-price-hunt>
+
+1. **顺序不能颠倒**：先把比价任务做完、报告交付完，再反过来做版本检查；检查最多花一次请求，**不得占用采集与写作的 token**。
+2. 读本地 `VERSION` → 当前版本。
+3. 查远端最新版本，**优先 Gitee**，逐级回退，**每级只试一次**，全失败就写「未查到」，不猜、不循环重试：
+   - `https://gitee.com/bio234/ecommerce-price-hunt/raw/main/VERSION`（会 302，需跟随跳转）
+   - `https://gitee.com/api/v5/repos/bio234/ecommerce-price-hunt/releases/latest` → 取 `tag_name`
+   - `https://raw.githubusercontent.com/neurotracee/ecommerce-price-hunt/main/VERSION`（国内打不开时加前缀 `https://ghproxy.net/`）
+4. 语义化版本比较。相同 → 只输出结尾那一行。
+
+**每次任务的最终回复结尾固定追加（默认开启；只加在交付那一条回复上，中间过程不重复，一行，不解释）：**
+
+> 📌 ecommerce-price-hunt v1.3.0 · 最新 v{远端或"未查到"}（{来源}）· {已是最新 / 落后 N 个版本，要不要我说明怎么升级？}
+
+**不是最新时，总共多给 3–5 行，不要更长：**
+- **差距**：`vX.Y.Z → vA.B.C`，落后几个版本（或差在哪个位）。
+- **改了什么**：读远端 `CHANGELOG.md` 对应小节，用**一到两句话**概括本次主要修复/改动了什么，不复述全部条目。
+- **问是否升级**：直接问「要我现在帮你一键升级到 vA.B.C 吗？」
+- **同时给手动下载直链**（问的同时就给，省一轮往返）：
+  - `https://gitee.com/bio234/ecommerce-price-hunt/releases/download/vA.B.C/ecommerce-price-hunt-vA.B.C.zip`
+  - `https://github.com/neurotracee/ecommerce-price-hunt/releases/download/vA.B.C/ecommerce-price-hunt-vA.B.C.zip`
+- **收尾用追问**：最后一句必须是问句，不要以陈述句结束。
+
+**用户同意升级时：**
+1. 先把现有技能目录**改名备份**（如 `ecommerce-price-hunt.bak-{YYYYMMDD}`），不直接删。
+2. 能自动下载就下载 zip、解压覆盖；**失败一次即停**，如实说「自动下载失败」，把直链再给一次，由用户自行决定（手动下载后发给你 / 先不升）；**不要反复重试，也不要换别的路子绕过限制**。
+3. 完成后核对 `VERSION` 是否等于目标版本并回报。
+4. **仅当使用者就是仓库作者、或用户明确要求**时，才把本次更新同步到两个平台的相关页面（README 版本号与安装直链、`CHANGELOG.md`、`RELEASE_NOTES.md`、GitHub/Gitee Release 正文与附件）；普通使用者只做本地升级，不动远端。
+
+版本号是否递增由维护者判断，本技能不擅自改版本号。

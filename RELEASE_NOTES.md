@@ -1,4 +1,4 @@
-# v1.2.0 · ecommerce-price-hunt
+# v1.3.0 · ecommerce-price-hunt
 
 **中文** | [English](#english)
 
@@ -6,11 +6,14 @@
 > 上游原仓库：<https://github.com/ccch1mneyyy/dsh-go/>
 > 本项目**不是** DSH go 的官方组件，不隶属于上游项目，也不包含、不复制上游的任何代码；独立发布、独立授权。
 
-## 本次发布：授予更开放的授权，并明确署名规范
+## 本次发布：技能自带版本自检与升级提示
 
-- **文档与提示词：CC BY-SA 4.0**（此前为 CC BY-NC-SA 4.0）。**去掉非商业条款，明确允许商用**。
-- **代码与模板：MIT**。
-- **任何二次开发、商用或借用均可**，但必须遵守 `NOTICE.md` 的署名规范。
+- `SKILL.md` 末尾新增**「版本自检与升级提示」**：每次比价任务**交付完成之后**，自动查一次远端版本，并在输出结尾固定追加一行版本状态（当前版本 · 远端最新 · 是否最新）。
+- 检查顺序固定：**先完成任务 → 再读本地 `VERSION` → 优先查 Gitee**（`VERSION` raw，失败回退 `releases/latest`）→ GitHub 兜底；每级只试一次，查不到就写「未查到」，不猜、不循环重试。
+- 落后时只多说 3–5 行：**版本差距** + **一到两句话说明本次主要改了什么**（依据 `CHANGELOG.md`）+ **主动问是否一键升级**，并同时给出两端 Release 下载直链。
+- 升级约定：先改名**备份**原技能目录；自动下载失败一次即停、把决定权交回用户；升完核对 `VERSION`；只有维护者本人或用户明确要求时才同步远端页面。
+- `SKILL.md` 末尾新增**简版作者声明**（上游归属、作者身份、提示词与仓库构建分工、首个构建月份、双许可要点），用最少 token 承载合规信息；完整版仍在 `README.md` / `NOTICE.md`。
+- 本轮不改变比价方法与任何用途限制；文档/提示词仍为 CC BY-SA 4.0、代码/模板仍为 MIT，「协议 ≠ 用途」继续有效。
 
 ## 作者与制作方式
 
@@ -52,11 +55,11 @@ https://gitee.com/bio234/ecommerce-price-hunt
 
 **不用 clone 仓库，不用敲命令，也不用翻到别的页面或章节找说明。**
 
-1. **直接把压缩包下载下来**（`ecommerce-price-hunt-v1.2.0.zip`）：
-   - GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-   - Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-2. **把下载到的 zip 文件本身直接发给 DSH**：拖进对话框，或作为附件上传。
-   **不要把下载链接发给 AI，也不要让它跳转去下载**——链接不一定打得开，来回跳转和重试只会白白消耗时间与 token。**给文件，不给链接。**
+1. **直接把压缩包下载下来**（`ecommerce-price-hunt-v1.3.0.zip`）：
+   - GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+   - Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+2. **把 zip 交给 DSH**：最稳的是把下载到的文件本身拖进对话框或作为附件上传；也可以直接把下载链接发给它、让它自己去取。
+   能不能顺利取到**取决于宿主能力和网络环境**（登录墙、跳转中转页、限流、人机验证都可能卡住，反复重试会白花时间与 token），卡住了就停下改手动下载——因人而异，不做一刀切。
 3. 对它说这一句（可直接复制）：
 
    > 帮我安装它到本地目录即可，我要把它添加进来。
@@ -101,17 +104,20 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 
 # English
 
-[中文](#v120--ecommerce-price-hunt) | **English**
+[中文](#v130--ecommerce-price-hunt) | **English**
 
 > **This is an open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/).**
 > Upstream repository: <https://github.com/ccch1mneyyy/dsh-go/>
 > This is **not** an official DSH go component, is not affiliated with the upstream project, and contains or copies **no upstream code**. Independently published, independently licensed.
 
-## This release: a more open license, plus explicit attribution rules
+## This release: the Skill now checks its own version and tells you about updates
 
-- **Documentation and prompts: CC BY-SA 4.0** (previously CC BY-NC-SA 4.0). **The non-commercial clause is gone; commercial use is explicitly allowed.**
-- **Code and templates: MIT.**
-- **Any secondary development, commercial use or reuse is allowed**, subject to the attribution rules in `NOTICE.md`.
+- `SKILL.md` gains a **"version self-check"** section at the end: **after the comparison task is delivered**, it checks the remote version once and appends a single fixed line to the output (current version · latest version · up to date or not).
+- Fixed order: **finish the task → read the local `VERSION` → check Gitee first** (`VERSION` raw, falling back to `releases/latest`) → GitHub as a last resort. One attempt per source; if all fail it says "not checked" instead of guessing or looping.
+- When out of date it adds only 3–5 lines: **the version gap**, **one or two sentences on what changed** (from `CHANGELOG.md`), and **an offer to upgrade**, together with the direct Release download links for both platforms.
+- Upgrade rules: **back up** the existing skill folder by renaming first; stop after the first failed automatic download and leave the decision to the user; verify `VERSION` afterwards; sync remote pages only when the maintainer themselves or the user explicitly asks.
+- A **condensed author statement** is appended to `SKILL.md` (upstream provenance, author identity, how prompts and the repository were produced, first build month, dual-license essentials) — the full version stays in `README.md` / `NOTICE.md`.
+- The comparison method and every usage restriction are unchanged; docs/prompts remain CC BY-SA 4.0, code/templates MIT, and "a license is not permission for any use case" still holds.
 
 ## Author & how it was made
 
@@ -151,11 +157,11 @@ https://gitee.com/bio234/ecommerce-price-hunt
 
 ## Install: download the zip → hand it to DSH → one sentence
 
-1. **Download the zip** (`ecommerce-price-hunt-v1.2.0.zip`):
-   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.2.0/ecommerce-price-hunt-v1.2.0.zip>
-2. **Send the zip file itself to DSH** — drag it into the chat or attach it.
-   **Do not paste the download link and do not ask the AI to follow a link** — links may not open, and redirects and retries only burn time and tokens. **Send the file, not the link.**
+1. **Download the zip** (`ecommerce-price-hunt-v1.3.0.zip`):
+   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+2. **Hand the zip to DSH** — the safest route is to drag the downloaded file into the chat or attach it; you can also paste the download link and let it fetch the file.
+   Whether that works **depends on the host and the network** (login walls, redirect interstitials, rate limits and human-verification checks can all stall it, and retries then burn time and tokens). If it stalls, stop and download manually — it varies, so no blanket rule.
 3. Say this one line:
 
    > 帮我安装它到本地目录即可，我要把它添加进来。

@@ -199,6 +199,19 @@ for name in ("docs/faq.md", "examples/prompt-examples.md", "docs/portability.md"
     require(INSTALL_PROMPT in read(name), f"{name} 缺少「一句话安装」提示词")
 
 
+# ------------------------------------------- 5b-2. SKILL.md 版本与仓库地址
+_version = read("VERSION").strip()
+_skill = read("SKILL.md")
+require(f"version: {_version}" in _skill,
+        f"SKILL.md front-matter 的 version 与 VERSION（{_version}）不一致")
+require(f"v{_version}" in _skill,
+        f"SKILL.md 正文未携带当前版本号 v{_version}（版本自检会读错）")
+for _url in ("https://github.com/neurotracee/ecommerce-price-hunt",
+             "https://gitee.com/bio234/ecommerce-price-hunt"):
+    require(_url in _skill, f"SKILL.md 缺少仓库地址 {_url}")
+require("优先 Gitee" in _skill, "SKILL.md 缺少「优先 Gitee 检查版本」的规则")
+require("先把比价任务做完" in _skill, "SKILL.md 缺少「先交付任务、再检查更新」的顺序要求")
+
 # ------------------------------------------- 5c. license & upstream metadata
 lic = read("LICENSE")
 require(lic.startswith("MIT License"), "LICENSE 不是标准 MIT 文本，平台无法识别许可证")
