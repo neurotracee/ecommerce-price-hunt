@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "含个人信息 / 合规风险，需私下反馈"
+    url: https://github.com/neurotracee/ecommerce-price-hunt/blob/main/SECURITY.md
+    about: "请不要在公开 Issue 里贴真实数据、截图或绕过类细节"
+  - name: "DSH go 上游仓库（本项目为附属项目）"
+    url: https://github.com/ccch1mneyyy/dsh-go/
+    about: "上游项目本身的问题请到上游仓库提交，本项目不处理"
+  - name: "使用问题与常见疑问"
+    url: https://github.com/neurotracee/ecommerce-price-hunt/blob/main/docs/faq.md
+    about: "先看 FAQ，可能已经有答案"

@@ -1,0 +1,40 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate skill structure and compliance text
+        run: python scripts/validate.py
+
+      - name: Check license and attribution files
+        run: |
+          test -f LICENSE
+          test -f LICENSE-DOCS.md
+          test -f NOTICE.md
+          grep -q "https://github.com/ccch1mneyyy/dsh-go/" README.md
+          grep -q "不得用于药品广告" README.md
+
+      - name: Pack release archive (smoke test)
+        run: bash scripts/pack.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skill-archive
+          path: dist/*.zip
+          if-no-files-found: error

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this Skill, please cite it as below."
+title: "ecommerce-price-hunt: a cross-platform price comparison Skill for AI Agents"
+abstract: >-
+  A prompt-and-playbook Skill that guides AI Agents through human-paced,
+  accessibility-based cross-platform price comparison, with unified unit-price
+  accounting, a medicine approval-number gate, and a dual-screen HTML report.
+  An ancillary open-source project for DSH go; no scraping or automation code.
+type: software
+authors:
+  - name: "neurotracee"
+    website: "https://github.com/neurotracee"
+version: 1.1.0
+date-released: 2026-11-08
+repository-code: "https://github.com/neurotracee/ecommerce-price-hunt"
+url: "https://github.com/ccch1mneyyy/dsh-go/"
+license:
+  - MIT
+  - CC-BY-NC-SA-4.0
+keywords:
+  - ai-agent
+  - skill
+  - prompt-engineering
+  - price-comparison
+  - accessibility
+  - dsh-go
+  - ecommerce
+notes: >-
+  Code/templates are MIT; documentation and prompts are CC BY-NC-SA 4.0.
+  Independent work, not an official DSH go component; contains no upstream code.
+  For personal reference only; not for medicine advertising, price promotion,
+  treatment advice, or published price rankings.

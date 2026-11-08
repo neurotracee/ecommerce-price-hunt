@@ -1,0 +1,20 @@
+# 统一换行，避免 Windows / macOS / Linux 上 diff 全文件抖动
+* text=auto eol=lf
+
+*.md       text eol=lf
+*.html     text eol=lf
+*.css      text eol=lf
+*.js       text eol=lf
+*.py       text eol=lf
+*.sh       text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.cff      text eol=lf
+LICENSE    text eol=lf
+
+# 二进制与压缩包不做换行转换
+*.png      binary
+*.jpg      binary
+*.webp     binary
+*.pdf      binary
+*.zip      binary

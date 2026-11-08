@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>商品全网比价报告</title>
+<!-- 骨架：只含比价章节；样式/脚本按宿主自带 html 技能的写法替换或扩展。
+     文件里的商品、价格、店铺全部是虚构占位，请勿把示例写成真实品牌与真实价格。
+     本项目是 DSH go（https://github.com/ccch1mneyyy/dsh-go/）的附属功能开源项目。 -->
+<style>
+  :root{
+    --paper:#EDF1EC; --surface:#F7F9F6; --line:#D8DFD8;
+    --ink:#16211D; --ink-2:#4A5750; --ink-3:#7C8A82;
+    --pine:#17594A; --clay:#9C3B2E; --ochre:#A9741F; --mint:#D8EADF;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:"Noto Sans CJK SC","PingFang SC",system-ui,sans-serif;
+       line-height:1.6;-webkit-text-size-adjust:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:clamp(18px,4vw,40px)}
+  h1{font-family:"Noto Serif CJK SC",Georgia,serif;font-size:clamp(20px,3vw,28px);margin:0 0 4px}
+  .meta{font-size:12px;color:var(--ink-3)}
+  .hero{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);
+        align-items:end;margin:18px 0 6px}
+  .big{font-family:"Noto Serif CJK SC",Georgia,serif;font-weight:700;
+       font-size:clamp(44px,9vw,84px);line-height:1;color:var(--pine);letter-spacing:-.02em}
+  .big small{font-size:.28em;color:var(--ink-2);margin-left:8px;letter-spacing:0}
+  .points{margin:0;padding:0;list-style:none;font-size:14px}
+  .points li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--ink-2)}
+  .metrics{display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0}
+  .metric{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+  .metric b{display:block;font-family:"Noto Serif CJK SC",Georgia,serif;font-size:clamp(17px,2.6vw,26px)}
+  .metric span{font-size:12px;color:var(--ink-3)}
+  section{margin:34px 0}
+  h2{font-size:clamp(18px,2.4vw,24px);margin:0 0 6px}
+  h2 em{font-style:normal;font-size:13px;color:var(--ink-3);margin-left:10px;font-weight:400}
+  .lead{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+  .chart-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+  .chart{height:clamp(260px,42vw,380px)}
+  /* 横屏用表格，竖屏用卡片 */
+  .table-view{display:none}
+  .card-view{display:grid;gap:10px}
+  .row-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+  .row-card .k{font-size:12px;color:var(--ink-3)}
+  .row-card .v{font-family:"Noto Serif CJK SC",Georgia,serif;font-size:18px}
+  @media (min-width:760px) and (min-aspect-ratio:5/4){
+    .table-view{display:block;overflow-x:auto}
+    .card-view{display:none}
+    .hero{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:32px}
+  }
+  table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{font-weight:600;color:var(--ink-2);background:var(--mint)}
+  .t-cheap{color:var(--pine);font-weight:700}
+  .t-hi{color:var(--clay)}
+  .chip{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+        background:var(--mint);color:var(--pine);margin:2px 4px 0 0}
+  .note{font-size:12px;color:var(--ink-3);margin-top:10px}
+  footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);
+         font-size:12px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>商品全网比价报告</h1>
+  <div class="meta">采集 2026-01-01 · 无障碍实机操作 · 只计入已核对规格的条目</div>
+
+  <!-- ===== 01 结论 ===== -->
+  <div class="hero">
+    <div>
+      <div class="big">0.000<small>元/克 · 单价最低</small></div>
+      <p class="lead">一句话说明最便宜那一条：平台、店铺、规格、实付。</p>
+    </div>
+    <ul class="points">
+      <li>最便宜：…</li>
+      <li>最稳妥：…</li>
+      <li>别买：…</li>
+    </ul>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><span>采集条数</span><b>0 条</b></div>
+    <div class="metric"><span>单价区间</span><b>0.000–0.000</b></div>
+    <div class="metric"><span>最贵/最便宜</span><b>0.0 倍</b></div>
+  </div>
+
+  <!-- ===== 02 每平台最低价 ===== -->
+  <section>
+    <h2>每个平台最低价<em>元/克 · 越低越划算</em></h2>
+    <p class="lead">同一商品在各平台取最便宜一条，换算单价后排序。</p>
+    <div class="chart-box"><div id="minChart" class="chart"></div></div>
+  </section>
+
+  <!-- ===== 03 同平台价差 ===== -->
+  <section>
+    <h2>同平台价差<em>最低 → 最高</em></h2>
+    <p class="lead">同一平台不同店铺能差几倍；只点第一条最容易多花钱。</p>
+    <div class="chart-box"><div id="rangeChart" class="chart"></div></div>
+  </section>
+
+  <!-- ===== 04 最低价前 N 名 ===== -->
+  <section>
+    <h2>最低价前三名<em>实付 / 发货地 / 时效</em></h2>
+    <div class="table-view">
+      <table>
+        <colgroup><col style="width:8%"><col style="width:20%"><col style="width:14%"><col style="width:14%"><col style="width:22%"><col style="width:22%"></colgroup>
+        <thead><tr><th>#</th><th>店铺 / 平台</th><th>标价</th><th>实付</th><th>发货地与快递</th><th>发货与送达</th></tr></thead>
+        <tbody><tr><td colspan="6">填写</td></tr></tbody>
+      </table>
+    </div>
+    <div class="card-view"><div class="row-card"><div class="k">#1 店铺 / 平台</div><div class="v">实付 ¥0.00</div><div class="k">发货地 · 快递 · 时效</div></div></div>
+  </section>
+
+  <!-- ===== 05 全量清单 ===== -->
+  <section>
+    <h2>全部在售链接<em>按单价升序</em></h2>
+    <div class="table-view">
+      <table>
+        <colgroup><col style="width:10%"><col style="width:34%"><col style="width:14%"><col style="width:14%"><col style="width:28%"></colgroup>
+        <thead><tr><th>平台</th><th>店铺 / 标签</th><th>到手价</th><th>单价</th><th>销量</th></tr></thead>
+        <tbody><tr><td colspan="5">填写</td></tr></tbody>
+      </table>
+    </div>
+    <div class="card-view"><div class="row-card"><div class="k">平台 · 店铺</div><div class="v">¥0.00</div><div class="k">0.000 元/克</div></div></div>
+  </section>
+
+  <!-- ===== 06 坑 ===== -->
+  <section>
+    <h2>下单前的坑<em>实测教训</em></h2>
+    <div class="card-view"><div class="row-card">…</div></div>
+  </section>
+
+  <footer>数据来源与局限：…（读不到、无客服、只能网页版都要写）<br>本报告仅供个人比价参考，不构成购买、用药或投资建议；不得用于药品广告、价格宣传、诊疗建议或对外发布的比价榜单；药品购买与使用请遵医嘱或药师指导。示例数据为虚构占位。</footer>
+</div>
+
+<!-- 本项目不捆绑 echarts.min.js（Apache ECharts, Apache-2.0）。
+     需要图表时：把宿主 html 技能提供的 ECharts 库内容内联到下面的占位 script 中，
+     或自行引入并遵守其许可。未引入时 mount() 会跳过，表格与卡片结构仍可正常显示。 -->
+<script>
+  /* ECharts 内联占位：如需图表，将库内容放在这里（或另行引入） */
+</script>
+<script>
+  // 按需填写：minChart 横向条形图、rangeChart 价格带；容器高度由 CSS 控制
+  const charts = [];
+  function mount(el, option){
+    if(!el || !window.echarts) return;
+    const c = echarts.init(el); c.setOption(option); charts.push(c);
+    new ResizeObserver(() => c.resize()).observe(el);
+  }
+  mount(document.getElementById("minChart"), {
+    grid:{left:92,right:56,top:16,bottom:34},
+    xAxis:{type:"value",name:"元/克",max:0.2,splitLine:{lineStyle:{color:"#E3E9E3"}}},
+    yAxis:{type:"category",data:[],axisTick:{show:false},axisLine:{show:false}},
+    series:[{type:"bar",data:[],barMaxWidth:22,label:{show:true,position:"right"}}]
+  });
+  mount(document.getElementById("rangeChart"), {
+    grid:{left:92,right:120,top:16,bottom:34},
+    xAxis:{type:"value",name:"元/克"},
+    yAxis:{type:"category",data:[]},
+    series:[]
+  });
+</script>
+</body>
+</html>
