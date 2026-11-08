@@ -79,8 +79,9 @@
 
 DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装完把路径告诉你。之后直接说「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」就能触发本 Skill。
 
-> ⭐ **用着顺手的话，回来点一颗 Star 就是最实在的回报**——不花钱，比打赏更有用，别人才搜得到。  
-> [GitHub 点 Star](https://github.com/neurotracee/ecommerce-price-hunt) · [Gitee 点 Star](https://gitee.com/bio234/ecommerce-price-hunt)　（赞赏码在文末，完全自愿）
+> ⭐ **用着顺手的话，回来点一颗 Star 就是最实在的回报**——不花钱，比打赏更有用，别人才搜得到。
+> [GitHub 点 Star](https://github.com/neurotracee/ecommerce-price-hunt) · [Gitee 点 Star](https://gitee.com/bio234/ecommerce-price-hunt)
+> 两个仓库的 Star 各算各的，**从哪边看到都建议顺手去另一边也点一颗**（对作者是鼓励，也让更多人发现它）；赞赏码在文末，完全自愿。
 
 ---
 
@@ -248,7 +249,10 @@ ecommerce-price-hunt/
 
 **点一颗 Star，比打赏更有用。**
 
-不想花钱完全没问题：到仓库点一颗 **Star** 就是最好的支持——Star 多了，别人才搜得到，作者也更有动力继续更新平台手册和坑位记录。两个仓库都可以点，点一个就够：
+不想花钱完全没问题：点一颗 **Star** 就是最好的支持——Star 多了，别人才搜得到，作者也更有动力继续更新平台手册和坑位记录。
+
+> 🔁 **小请求：不管你是从哪个仓库看到这个项目的，都顺手到对面那个仓库也点一颗 Star。**
+> 两个仓库的 Star 数、搜索权重和推荐位是**各自独立**的：在 GitHub 点了，Gitee 那边的访客看不到；在 Gitee 点了，GitHub 那边也不涨。两边各点一下等于帮这个项目多开一扇门——既是对作者的鼓励，也能让更多正在找比价方法的人发现它。当然，只点一边也完全没问题，方便为先。
 
 - GitHub 点 Star：<https://github.com/neurotracee/ecommerce-price-hunt>
 - Gitee 点 Star：<https://gitee.com/bio234/ecommerce-price-hunt>
@@ -344,7 +348,8 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
    *("Install it into my local directory for me — I want to add it in.")* DSH unzips it into the local skills folder and reports the path.
 
 > ⭐ **If it works well for you, a Star is the most useful way to say thanks** — it costs nothing, helps more people find the project, and beats a tip.
-> [Star on GitHub](https://github.com/neurotracee/ecommerce-price-hunt) · [Star on Gitee](https://gitee.com/bio234/ecommerce-price-hunt)　(tip QR is at the end of this section — entirely optional)
+> [Star on GitHub](https://github.com/neurotracee/ecommerce-price-hunt) · [Star on Gitee](https://gitee.com/bio234/ecommerce-price-hunt)
+> The two repositories count stars separately, so **whichever side you are on, please also star the other one** (it encourages the author and helps others discover it). The tip QR is at the end of this section — entirely optional.
 
 > **License (plain text, in case badge images do not load)**: documentation and prompts are **CC BY-SA 4.0** (attribution, indicate changes, share-alike, **commercial use allowed**); code and templates are **MIT**. Any secondary development, commercial use or reuse is allowed, provided you cite **both** repository URLs above and state that one author manages them. See [`NOTICE.md`](NOTICE.md).
 
@@ -450,7 +455,10 @@ Upstream [DSH go](https://github.com/ccch1mneyyy/dsh-go/) is AGPL-3.0. This proj
 
 **A star beats a tip.**
 
-If you don't feel like paying anything, that's completely fine: starring the repository is the best support — more stars mean more people find the project, and it keeps the author motivated to update the platform playbooks and pitfall notes. Either repository will do; one star is enough:
+If you don't feel like paying anything, that's completely fine: a **star** is the best support — more stars mean more people find the project, and it keeps the author motivated to update the platform playbooks and pitfall notes.
+
+> 🔁 **One small request: whichever repository you found this project on, please also drop a star on the other one.**
+> The two repositories count stars, search ranking and recommendations **completely independently**: a star on GitHub is invisible to visitors on Gitee, and vice versa. Starring both opens one more door for the project — it encourages the author and helps more people who are looking for a comparison method actually find it. Of course, one star alone is perfectly fine too — convenience comes first.
 
 - Star on GitHub: <https://github.com/neurotracee/ecommerce-price-hunt>
 - Star on Gitee: <https://gitee.com/bio234/ecommerce-price-hunt>
