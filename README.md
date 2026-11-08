@@ -5,9 +5,10 @@
 | **中文** | [English](#english) |
 
 > **项目定位（请先读这一段）**  
-> 这是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 做的一个**附属功能的开源项目**：把「让 AI 自动完成商品/药品全网比价」这项能力，以一份可复用的 Skill（提示词 + 操作手册）形式沉淀下来，供 DSH go 及其他具备读屏能力的 AI Agent 参考使用。  
+> 这是为 **[DSH go](https://github.com/ccch1mneyyy/dsh-go/)** 做的一个**附属功能的开源项目**：把「让 AI 自动完成商品全网比价」这项能力，以一份可复用的 Skill（提示词 + 操作手册）形式沉淀下来，供 DSH go 及其他具备读屏能力的 AI Agent 参考使用。  
 > 上游原仓库：**<https://github.com/ccch1mneyyy/dsh-go/>**  
 > 上游 DSH go 是基于 **DeepSeek Harness** 的二次开发方向（其仓库标签含 `deepseek`、`deepseek-harness`）；本项目沿用的是同一类 Agent 能力语境，不含上游代码、也不隶属于上游。  
+> **药品比价是其中的专项能力**：由作者与 **DeepSeek** 经过专项优化与调试，重点是**避免本想买「国药准字」的正规药品，却买成了食字号 / 妆字号 / 消字号（以及健字号、械字号）的别的产品**。
 > 本项目**不是 DSH go 的官方组件**，不隶属于上游项目，也不包含、不复制上游的任何代码；它是一个独立发布、独立授权的方法论参考包。
 
 **两个仓库（同一作者管理）**
@@ -26,6 +27,8 @@
 - **开源编写与仓库构建**：由 **腾讯 WorkBuddy 的 Hy4** 与 **DeepSeek V4.1 Flash 1017 版** 分别负责（**部分工作有具体的分工**，两个模型承担的角色不完全相同）。
 - **作者本人负责**：指令下达、过程监督、结果反馈，以及提供创意想法与最终取舍。
 - **仓库首个构建日期：2026 年 11 月。**
+
+**关于维护节奏（提前说清楚）**：作者在创建本仓库时为初中生，具体情况不作解释。项目**刚发布的这段时间可能会比较频繁地更新与响应**；之后会转为**低频维护**——大约**一两个月看一两次** issue 与反馈，不承诺即时响应，也不承诺每个建议都会采纳。文档与坑位记录会尽量保持准确，但平台改版后可能需要等下一次查看才会补上。
 
 ## 授权与声明规范（二次开发 / 商用 / 借用前必读）
 
@@ -283,10 +286,11 @@ ecommerce-price-hunt/
 | [中文](#电商全网比价-skill) | **English** |
 
 > **Positioning — read this first**  
-> This is an **open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/)**. It packages the "let an AI automatically compare product / medicine prices across stores" capability as a reusable Skill (prompts + operating playbooks), for DSH go and other AI Agents with screen-reading ability.  
+> This is an **open-source project for an ancillary feature built for [DSH go](https://github.com/ccch1mneyyy/dsh-go/)**. It packages the "let an AI automatically compare product prices across stores" capability as a reusable Skill (prompts + operating playbooks), for DSH go and other AI Agents with screen-reading ability.  
 > Upstream repository: **<https://github.com/ccch1mneyyy/dsh-go/>**  
 > Upstream DSH go follows the **DeepSeek Harness** development direction (its repository topics include `deepseek` and `deepseek-harness`). This project shares that Agent-capability context but contains no upstream code and is not affiliated with it.  
 > This project is **not an official DSH go component**, contains or copies **no upstream code**, and is independently published under its own license.
+> **Medicine comparison is a specialisation inside it**: optimised and debugged by the author together with **DeepSeek**, with the focus on **not ending up with a food-, cosmetic- or hygiene-licence product (食字号 / 妆字号 / 消字号, also 健字号 / 械字号) when what you actually wanted was a proper 国药准字 medicine**.
 
 
 **Two repositories, one author**
@@ -305,6 +309,8 @@ ecommerce-price-hunt/
 - **Open-source writing and repository construction** were handled respectively by **Hy4 on Tencent WorkBuddy** and **DeepSeek V4.1 Flash 1017** — the two models had **partly different, specifically divided roles**.
 - **The author was responsible for** issuing instructions, supervising the process, giving feedback, and providing the creative ideas.
 - **First repository build date: November 2026.**
+
+**On maintenance pace (stated up front)**: the author was a junior high school student when this repository was created; the specific circumstances are not something this README explains. Expect **fairly frequent updates right after the initial release**, then **low-frequency maintenance — roughly one or two looks a month**. There is no promise of a fast reply, and no promise that every suggestion will be adopted. The playbooks and pitfall notes aim to stay accurate, but after a platform redesign they may not be corrected until the next check.
 
 ## License & attribution rules (read before forking or commercial use)
 

@@ -82,7 +82,7 @@ echo "[2/7] 打包 $TAG"
 [[ -f "$ZIP" ]] || { echo "打包失败：$ZIP 不存在"; exit 1; }
 
 echo "[3/7] 确认两端仓库存在并同步简介里的安装提示"
-DESC="为 DSH go（基于 DeepSeek Harness 二开）做的附属功能开源项目：AI Agent 电商/药品全网比价 Skill。下载 Release 的 zip 直接发给 DSH，说「帮我安装它到本地目录即可，我要把它添加进来」即可装上。许可：文档 CC BY-SA 4.0（允许商用，须标注 GitHub + Gitee 双仓库地址并说明同一作者）/ 代码 MIT。上游 $UPSTREAM"
+DESC="为 DSH go（基于 DeepSeek Harness 二开）做的附属功能开源项目：AI Agent 电商全网比价 Skill（含国药准字药品专项：避免把药买成食/妆/消/健/械字号）。下载 Release 的 zip 直接发给 DSH，说「帮我安装它到本地目录即可，我要把它添加进来」即可装上。许可：文档 CC BY-SA 4.0（允许商用，须标注 GitHub + Gitee 双仓库地址并说明同一作者）/ 代码 MIT。上游 $UPSTREAM"
 gh_code=$(gh_api -o /dev/null -w "%{http_code}" "https://api.github.com/repos/$GH_OWNER/$REPO" || true)
 if [[ "$gh_code" == "404" ]]; then
   "$PY" - "$REPO" "$DESC" <<'PY' > "$TMP/gh_repo.json"

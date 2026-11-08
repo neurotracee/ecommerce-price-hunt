@@ -23,6 +23,8 @@
 - **开源编写与仓库构建**：由 **腾讯 WorkBuddy 的 Hy4** 与 **DeepSeek V4.1 Flash 1017 版** 分别负责（部分工作有具体分工）。
 - **作者负责**：指令、监督、反馈与创意想法。
 - **仓库首个构建日期：2026 年 11 月。**
+- **维护节奏**：刚发布阶段可能较频繁更新与响应，之后转为**低频维护**（大约一两个月看一两次），不承诺即时响应；作者为初中生，具体原因不作解释。
+- **药品专项**：由作者与 DeepSeek 专项优化调试，重点是避免把「国药准字」的正规药品买成食字号 / 妆字号 / 消字号 / 健字号 / 械字号产品。
 
 ## 授权与署名规范（硬要求）
 
@@ -128,6 +130,8 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - **Open-source writing and repository construction**: handled respectively by **Hy4 on Tencent WorkBuddy** and **DeepSeek V4.1 Flash 1017** (the roles were partly and specifically divided).
 - **The author was responsible for** instructions, supervision, feedback and creative input.
 - **First repository build date: November 2026.**
+- **Maintenance pace**: frequent updates right after the initial release, then **low-frequency maintenance** (roughly one or two looks a month), with no promise of a fast reply. The author was a junior high school student; the specific circumstances are not explained.
+- **Medicine specialisation**: optimised and debugged by the author together with DeepSeek, focusing on not buying a food-, cosmetic-, hygiene-, supplement- or device-licence product when a proper 国药准字 medicine is what was intended.
 
 ## License & attribution (hard requirements)
 
