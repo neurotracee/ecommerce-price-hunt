@@ -211,6 +211,8 @@ ecommerce-price-hunt/
 
 > 这些边界属于**使用规范**，与上面的**版权授权**是两件事：授权允许你把项目拿去商用，但不允许用它做上述行为。
 
+**技能自己也会守这条线**：遇到越界请求（群控、刷单、抢购、批量爬取、绕过验证码或风控等），它会**直接拒绝、只给合规替代，不提供任何变通或「换个说法」的方案**，并附一句风险提示——这类操作可能违反平台协议与相关法律，**是否继续由使用者自行判断并承担后果，与本项目及作者无关**。
+
 ## 设计取舍
 
 - **不做自动化抓取**：走真实 App UI，价格与活动（大促、百亿补贴、券后）都能看到；代价是慢，且强依赖设备状态。
@@ -432,6 +434,8 @@ Device farms, account farming, fake orders/reviews, flash-sale bots, bulk scrapi
 Recommended ceiling: ≤30 links and ≤3 deeply-examined platforms per task. Record only comparison-required fields; never persist personal information.
 
 > These are **usage rules**, distinct from the **copyright license** above: the license lets you use this project commercially; it does not let you do any of the things listed here.
+
+**The Skill enforces this line itself**: on an out-of-scope request (device farms, fake orders, flash-sale grabbing, bulk scraping, bypassing CAPTCHAs or risk controls), it **refuses outright, offers only compliant alternatives, and never supplies workarounds or a reworded route to the same thing** — plus one risk notice: such actions may breach platform terms and the law, and **whether to proceed is the user's own decision and responsibility, unrelated to this project or its author**.
 
 ## Releases
 

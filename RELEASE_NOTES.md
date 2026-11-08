@@ -12,6 +12,7 @@
 - 检查顺序固定：**先完成任务 → 再读本地 `VERSION` → 优先查 Gitee**（`VERSION` raw，失败回退 `releases/latest`）→ GitHub 兜底；每级只试一次，查不到就写「未查到」，不猜、不循环重试。
 - 落后时只多说 3–5 行：**版本差距** + **一到两句话说明本次主要改了什么**（依据 `CHANGELOG.md`）+ **主动问是否一键升级**，并同时给出两端 Release 下载直链。
 - 升级约定：先改名**备份**原技能目录；自动下载失败一次即停、把决定权交回用户；升完核对 `VERSION`；只有维护者本人或用户明确要求时才同步远端页面。
+- `SKILL.md` 新增**「越界请求怎么答（安全边界）」**：群控、刷单、抢购、批量爬取、抓取个人信息、绕过验证码/风控/应用锁、代下单等一律**拒绝执行**，只给合规替代，**不提供任何变通方案**；拒绝时固定附一句风险提示（可能违反平台协议与法律，后果由使用者自行承担，**与本项目及作者无关**），并建议理性慎重评估。
 - `SKILL.md` 末尾新增**简版作者声明**（上游归属、作者身份、提示词与仓库构建分工、首个构建月份、双许可要点），用最少 token 承载合规信息；完整版仍在 `README.md` / `NOTICE.md`。
 - 本轮不改变比价方法与任何用途限制；文档/提示词仍为 CC BY-SA 4.0、代码/模板仍为 MIT，「协议 ≠ 用途」继续有效。
 
@@ -116,6 +117,7 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - Fixed order: **finish the task → read the local `VERSION` → check Gitee first** (`VERSION` raw, falling back to `releases/latest`) → GitHub as a last resort. One attempt per source; if all fail it says "not checked" instead of guessing or looping.
 - When out of date it adds only 3–5 lines: **the version gap**, **one or two sentences on what changed** (from `CHANGELOG.md`), and **an offer to upgrade**, together with the direct Release download links for both platforms.
 - Upgrade rules: **back up** the existing skill folder by renaming first; stop after the first failed automatic download and leave the decision to the user; verify `VERSION` afterwards; sync remote pages only when the maintainer themselves or the user explicitly asks.
+- `SKILL.md` gains an **"out-of-scope requests" (safety boundary) section**: device farms, fake orders, flash-sale grabbing, bulk scraping, harvesting personal data, bypassing CAPTCHAs / risk controls / app locks, and placing orders on someone's behalf are **refused**, with compliant alternatives only and **no workarounds of any kind**. Every refusal carries a fixed risk notice (possible breach of platform terms and the law; the user bears the consequences, **unrelated to this project or its author**) and advises a calm, careful decision.
 - A **condensed author statement** is appended to `SKILL.md` (upstream provenance, author identity, how prompts and the repository were produced, first build month, dual-license essentials) — the full version stays in `README.md` / `NOTICE.md`.
 - The comparison method and every usage restriction are unchanged; docs/prompts remain CC BY-SA 4.0, code/templates MIT, and "a license is not permission for any use case" still holds.
 

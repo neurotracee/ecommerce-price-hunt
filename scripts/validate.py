@@ -210,6 +210,9 @@ for _url in ("https://github.com/neurotracee/ecommerce-price-hunt",
              "https://gitee.com/bio234/ecommerce-price-hunt"):
     require(_url in _skill, f"SKILL.md 缺少仓库地址 {_url}")
 require("优先 Gitee" in _skill, "SKILL.md 缺少「优先 Gitee 检查版本」的规则")
+require("越界请求怎么答" in _skill, "SKILL.md 缺少「越界请求怎么答」安全边界")
+require("与本项目及作者无关" in _skill,
+        "SKILL.md 缺少越界请求的风险提示（须声明与项目/作者无关）")
 require("先把比价任务做完" in _skill, "SKILL.md 缺少「先交付任务、再检查更新」的顺序要求")
 
 # ------------------------------------------- 5c. license & upstream metadata
