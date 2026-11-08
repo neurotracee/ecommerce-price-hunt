@@ -220,7 +220,7 @@ ecommerce-price-hunt/
 
 ## 许可
 
-> ⚠️ **关于平台侧栏显示的许可证**：GitHub / Gitee 自动识别到的 **MIT 仅覆盖代码与模板**（`scripts/`、`assets/`，以及 `LICENSE` 本身）。**文档与提示词（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`、`NOTICE.md`）是 CC BY-SA 4.0**，以 `LICENSE-DOCS.md` 为准。请勿把仓库侧栏的「MIT license」当成整个项目的授权。
+> ⚠️ **关于平台侧栏显示的许可证**：侧栏那个标签是平台**自动识别**的结果，不能代表整个项目的授权。GitHub 多半显示 **MIT**（它只读 `LICENSE`），Gitee 可能显示 **CC BY-SA 4.0**（它按内容判断）——两者都只说对了一半：**代码与模板是 MIT**（`scripts/`、`assets/`、`LICENSE`），**文档与提示词是 CC BY-SA 4.0**（`README*`、`SKILL.md`、`references/`、`docs/`、`examples/`、`NOTICE.md`，以 `LICENSE-DOCS.md` 为准）。以本文件与 `NOTICE.md` 的说明为准。
 
 - **文档与提示词**：[CC BY-SA 4.0](LICENSE-DOCS.md)（署名 + 标明修改 + 相同方式共享，**允许商用**）。
 - **代码与模板**：[MIT](LICENSE)。
@@ -392,7 +392,7 @@ Platform observations, pitfall corrections, translations and documentation impro
 
 ## License
 
-> ⚠️ **About the license shown in the platform sidebar**: the **MIT** label auto-detected by GitHub / Gitee covers **code and templates only** (`scripts/`, `assets/`, and `LICENSE` itself). **Documentation and prompts (`README*`, `SKILL.md`, `references/`, `docs/`, `examples/`, `NOTICE.md`) are CC BY-SA 4.0** — see `LICENSE-DOCS.md`. Do not read the sidebar "MIT license" as the license for the whole project.
+> ⚠️ **About the license shown in the platform sidebar**: that label is an **auto-detection** result and does not represent the whole project. GitHub will usually show **MIT** (it only reads `LICENSE`); Gitee may show **CC BY-SA 4.0** (it guesses from content). Each is only half the story: **code and templates are MIT** (`scripts/`, `assets/`, `LICENSE`), while **documentation and prompts are CC BY-SA 4.0** (`README*`, `SKILL.md`, `references/`, `docs/`, `examples/`, `NOTICE.md`; see `LICENSE-DOCS.md`). This file and `NOTICE.md` are authoritative.
 
 - **Documentation and prompts**: [CC BY-SA 4.0](LICENSE-DOCS.md) (attribution, indicate changes, share-alike, **commercial use allowed**).
 - **Code and templates**: [MIT](LICENSE).

@@ -204,9 +204,9 @@ require(lic.rstrip().endswith("SOFTWARE."),
         "LICENSE 末尾有多余内容，平台会把 MIT 误判为 Other")
 require("CC BY-NC-SA" not in lic,
         "LICENSE 不应混入文档许可说明（会破坏平台对 MIT 的自动识别）")
-require("MIT 仅覆盖代码" in readme, "README.md 缺少「平台 MIT 仅覆盖代码」提示")
-require("code and templates only" in readme,
-        "README.md 英文部分缺少「MIT only covers code」提示")
+require("代码与模板是 MIT" in readme, "README.md 缺少「代码与模板是 MIT」的双许可说明")
+require("code and templates are MIT" in readme,
+        "README.md 英文部分缺少「code and templates are MIT」说明")
 require("CC BY-SA 4.0" in read("LICENSE-DOCS.md"), "LICENSE-DOCS.md 未声明 CC BY-SA 4.0")
 require("Attribution-ShareAlike 4.0 International" in read("LICENSE-DOCS.md"),
         "LICENSE-DOCS.md 缺少 CC BY-SA 4.0 官方法律文本")
