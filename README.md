@@ -5,6 +5,29 @@
 > 上游原仓库：**<https://github.com/ccch1mneyyy/dsh-go/>**
 > 本项目**不是 DSH go 的官方组件**，不隶属于上游项目，也不包含、不复制上游的任何代码；它是一个独立发布、独立授权的方法论参考包。
 
+---
+
+## 📦 安装：把压缩包下载下来 → 直接发给 DSH → 一句话装好
+
+**不用 clone 仓库，不用敲命令，也不用在本页翻上翻下找说明。**
+
+**第 1 步｜直接把压缩包下载下来**（技能安装包 `ecommerce-price-hunt-v1.1.0.zip`）：
+
+- GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+- Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+
+**第 2 步｜把下载到的 zip 文件本身直接发给 DSH**：拖进对话框，或作为附件上传。
+
+> ⚠️ **不要把下载链接发给 AI，也不要让它跳转去下载。** 链接它不一定打得开，来回跳转和重试只会白白消耗时间与 token。**给文件，不给链接。**
+
+**第 3 步｜对它说这一句**（可直接复制）：
+
+> 帮我安装它到本地目录即可，我要把它添加进来。
+
+DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装完把路径告诉你。之后直接说「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」就能触发本 Skill。
+
+---
+
 [![Release](https://img.shields.io/github/v/release/neurotracee/ecommerce-price-hunt?label=release)](https://github.com/neurotracee/ecommerce-price-hunt/releases)
 [![License: MIT](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/docs-CC%20BY--NC--SA%204.0-orange.svg)](LICENSE-DOCS.md)
@@ -49,19 +72,17 @@
 
 一句话：**把踩过的坑写成闸门，把重复劳动写成模板，把长手册拆成按需加载**。这是本项目对「提升 AI 能力 / 减少 token 与时间浪费」的全部主张，不做效果数字的承诺。
 
-## 快速开始
+## 装好之后怎么用
 
-1. 下载 [最新 Release](https://github.com/neurotracee/ecommerce-price-hunt/releases) 里的 `ecommerce-price-hunt-vX.Y.Z.zip`，解压。
-2. 把整个目录放进你的 Agent 的技能目录（DSH go 示例见下）。
-3. 对 Agent 说：
+直接说：
 
-   > 开始针对「某品牌 某商品 某规格」做全网比价，出 HTML 报告，我收货地在××省××市。
+> 开始针对「某品牌 某商品 某规格」做全网比价，出 HTML 报告，我收货地在××省××市。
 
-Agent 会先判品类（普通商品 / 药品 / 化妆品 / 保健食品 / 医疗器械），再逐平台采集，最后交付 HTML 报告。
+Agent 会先判品类（普通商品 / 药品 / 化妆品 / 保健食品 / 医疗器械），再逐平台采集，最后交付 HTML 报告。更多触发话术在 `examples/prompt-examples.md`。
 
-## 安装
+## 手动安装（用 DSH go 时不需要）
 
-DSH go / 具备 `~/.dsh/skills` 约定的宿主：
+只有在换到别的 Agent 宿主、或想自己动手时才需要。DSH go / 具备 `~/.dsh/skills` 约定的宿主：
 
 ```bash
 mkdir -p ~/.dsh/skills

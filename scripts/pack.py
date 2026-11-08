@@ -50,12 +50,21 @@ INSTALL_TXT = f"""ecommerce-price-hunt v{VERSION}
 上游原仓库: https://github.com/ccch1mneyyy/dsh-go/
 本项目不是 DSH go 的官方组件，不含上游代码，独立发布、独立授权。
 
-安装
-----
-把本目录整个复制到 Agent 的技能目录，例如：
+安装（推荐：让 DSH 自己装）
+----------------------------
+1. 把压缩包文件本身直接发给 DSH（拖进对话框 / 作为附件上传）。
+   不要把下载链接发给 AI，也不要让它跳转去下载 —— 给文件，不给链接。
+2. 对 AI 说这一句：
+       帮我安装它到本地目录即可，我要把它添加进来。
+   DSH 会自己解压并把 ecommerce-price-hunt/ 放进本地技能目录，装完回报路径。
+3. 之后说「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，
+   我收货地在〈省 市〉」即可触发本 Skill。
+
+手动安装（换其它宿主时才需要）
+--------------------------------
     mkdir -p ~/.dsh/skills
     cp -r ecommerce-price-hunt ~/.dsh/skills/
-其他宿主见 docs/portability.md。
+目录映射见 docs/portability.md。
 
 免责声明（与 SKILL.md 一致）
 ----------------------------

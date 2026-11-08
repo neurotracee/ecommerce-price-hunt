@@ -18,16 +18,27 @@
 
 > 本项目仅提供比价方法，不构成用药、购买或投资建议；价格信息具有时效性，作者不对因使用本项目产生的任何直接或间接损失负责。请遵守各平台用户协议与相关法律法规。
 
-## 安装
+## 安装：下载压缩包 → 直接发给 DSH → 一句话装好
 
-下载本 Release 的 `ecommerce-price-hunt-v1.1.0.zip`，解压后把整个目录放进 Agent 的技能目录：
+**不用 clone 仓库，不用敲命令，也不用翻到别的页面或章节找说明。**
+
+1. **直接把压缩包下载下来**（`ecommerce-price-hunt-v1.1.0.zip`）：
+   - GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+   - Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+2. **把下载到的 zip 文件本身直接发给 DSH**：拖进对话框，或作为附件上传。
+   **不要把下载链接发给 AI，也不要让它跳转去下载**——链接不一定打得开，来回跳转和重试只会白白消耗时间与 token。**给文件，不给链接。**
+3. 对它说这一句（可直接复制）：
+
+   > 帮我安装它到本地目录即可，我要把它添加进来。
+
+DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装完把路径告诉你。之后直接说「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」即可触发。
+
+手动安装（一般用不到，换其它宿主时才需要）：
 
 ```bash
 mkdir -p ~/.dsh/skills
 cp -r ecommerce-price-hunt ~/.dsh/skills/
 ```
-
-其他宿主见仓库内 `docs/portability.md`。然后对 Agent 说：「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉。」
 
 ## 包含内容
 

@@ -140,6 +140,22 @@ require("CC BY-NC-SA 4.0" in readme, "README.md 缺少文档许可说明")
 require("MIT" in readme, "README.md 缺少代码许可说明")
 
 
+# ------------------------------------------- 5b. one-sentence install flow
+INSTALL_PROMPT = "帮我安装它到本地目录即可，我要把它添加进来"
+for name, text in (("README.md", readme), ("README.en.md", readme_en),
+                   ("RELEASE_NOTES.md", release_notes)):
+    require(INSTALL_PROMPT in text, f"{name} 缺少「一句话安装」提示词")
+require(INSTALL_PROMPT in readme[:2500],
+        "README.md 开头第一屏未给出「一句话安装」提示词")
+require("给文件，不给链接" in readme, "README.md 缺少「给文件，不给链接」说明")
+require("不要把下载链接发给 AI" in release_notes,
+        "RELEASE_NOTES.md 缺少「不要把下载链接发给 AI」说明")
+require(INSTALL_PROMPT in read("scripts/pack.py"),
+        "pack.py 生成的 INSTALL.txt 缺少「一句话安装」提示词")
+for name in ("docs/faq.md", "examples/prompt-examples.md", "docs/portability.md"):
+    require(INSTALL_PROMPT in read(name), f"{name} 缺少「一句话安装」提示词")
+
+
 # ------------------------------------------------------- 6. sample data safety
 skeleton = read("assets/report-skeleton.html")
 require("虚构" in skeleton, "report-skeleton.html 未标注示例数据为虚构")

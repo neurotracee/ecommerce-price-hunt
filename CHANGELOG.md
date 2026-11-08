@@ -36,6 +36,12 @@
 - `docs/`（设计说明、宿主移植、FAQ）与 `examples/`（触发话术、任务流程示例）。
 - `scripts/validate.py`、`scripts/pack.sh`、`scripts/publish.sh`：结构校验、打包、一键双端同步发布。
 
+### 文档修订 · 2026-11-08（同版本内，不改变 Skill 行为）
+
+- README（中/英）、Release 正文、安装包 `INSTALL.txt`、FAQ、话术示例、宿主移植文档统一改为三步安装：**下载 zip → 把文件本身直接发给 DSH → 说「帮我安装它到本地目录即可，我要把它添加进来」**。
+- 明确「不要把下载链接发给 AI、不要让它跳转去下载」，避免多余的跳转、重试与 token 消耗；不再要求 clone 仓库或敲命令。
+- 同步到 GitHub 与 Gitee 的仓库首页、简介、Release 正文与附件。
+
 ### 说明
 
 - 报告样式与双屏自检优先复用宿主自带 HTML 技能；`docs/portability.md` 给出无 HTML 技能时的替代做法，避免强绑定 DSH go 的本地路径。

@@ -9,6 +9,23 @@
 
 ---
 
+## 📦 Install: download the zip → hand it to DSH → one sentence
+
+**No cloning, no terminal commands, no jumping up and down this page.**
+
+1. **Download the zip** (`ecommerce-price-hunt-v1.1.0.zip`):
+   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.1.0/ecommerce-price-hunt-v1.1.0.zip>
+2. **Send the zip file itself to DSH** — drag it into the chat, or attach it as a file.
+   > ⚠️ **Do not paste a download link into the chat and do not ask the AI to follow a link.** Links may not open; redirects and retries only waste time and tokens. **Send the file, not the link.**
+3. Say this one line (copy as-is; the prompt is in Chinese because DSH is a Chinese-language client):
+
+   > 帮我安装它到本地目录即可，我要把它添加进来。
+
+   *(“Install it into my local directory for me — I want to add it to my skills.”)* DSH unzips it into the local skills folder and reports the path. Then start a task with: 「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」.
+
+---
+
 ## ⚠️ Disclaimer (mirrors `SKILL.md`; the Chinese text there is authoritative)
 
 > **Statement of purpose**
@@ -44,13 +61,13 @@ It is **not** a crawler library, **not** a price API, **not** an automation scri
 
 In short: **turn known pitfalls into gates, repeated work into templates, and long manuals into on-demand loads.** No quantitative efficiency claims are made.
 
-## Quick start
+## After installing
 
-1. Download `ecommerce-price-hunt-vX.Y.Z.zip` from the [latest Release](https://github.com/neurotracee/ecommerce-price-hunt/releases) and unzip it.
-2. Put the whole directory into your Agent's skills folder.
-3. Say: *"Run a cross-platform price comparison for ⟨brand + product + spec⟩, give me an HTML report, my delivery address is in ⟨city⟩."*
+Say: *"Run a cross-platform price comparison for ⟨brand + product + spec⟩, give me an HTML report, my delivery address is in ⟨city⟩."* More trigger phrases are in `examples/prompt-examples.md`.
 
-## Install
+## Manual install (not needed with DSH go)
+
+Only for other hosts or for doing it by hand:
 
 ```bash
 mkdir -p ~/.dsh/skills

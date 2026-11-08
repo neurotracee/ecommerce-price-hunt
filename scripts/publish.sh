@@ -81,8 +81,8 @@ echo "[2/7] 打包 $TAG"
 "$PY" scripts/pack.py "$VERSION"
 [[ -f "$ZIP" ]] || { echo "打包失败：$ZIP 不存在"; exit 1; }
 
-echo "[3/7] 确认两端仓库存在"
-DESC="为 DSH go 做的附属功能开源项目：AI Agent 电商/药品全网比价 Skill（提示词 + 操作手册，无爬虫/自动化脚本）。上游 $UPSTREAM"
+echo "[3/7] 确认两端仓库存在并同步简介里的安装提示"
+DESC="为 DSH go 做的附属功能开源项目：AI Agent 电商/药品全网比价 Skill（提示词+操作手册，无爬虫）。下载 Release 的 zip 直接发给 DSH，说「帮我安装它到本地目录即可，我要把它添加进来」即可装上。上游 $UPSTREAM"
 gh_code=$(gh_api -o /dev/null -w "%{http_code}" "https://api.github.com/repos/$GH_OWNER/$REPO" || true)
 if [[ "$gh_code" == "404" ]]; then
   "$PY" - "$REPO" "$DESC" <<'PY' > "$TMP/gh_repo.json"
@@ -103,6 +103,15 @@ fi
 gh_api -X PUT -H "Content-Type: application/json" \
   --data '{"names":["ai-agent","skill","prompt-engineering","price-comparison","ecommerce","dsh-go","accessibility","agent-skills"]}' \
   "https://api.github.com/repos/$GH_OWNER/$REPO/topics" -o /dev/null || true
+# 简介（About 区）也带上「下载 zip 直接发给 DSH」的提示，已存在的仓库同样更新
+"$PY" - "$DESC" <<'PY' > "$TMP/gh_desc.json"
+import json, sys
+print(json.dumps({"description": sys.argv[1],
+                  "homepage": "https://github.com/ccch1mneyyy/dsh-go/"},
+                 ensure_ascii=False))
+PY
+gh_api -X PATCH -H "Content-Type: application/json" --data-binary "@$TMP/gh_desc.json" \
+  "https://api.github.com/repos/$GH_OWNER/$REPO" -o /dev/null || true
 
 gitee_code=$(gitee_api -o /dev/null -w "%{http_code}" \
   "https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO?access_token=$GITEE_TOKEN" || true)
@@ -120,6 +129,13 @@ if [[ "$gitee_code" == "404" ]]; then
 else
   echo "  Gitee 仓库已存在 ($gitee_code)"
 fi
+# Gitee 的 PATCH 要求同时带 name；简介与 GitHub 保持一致
+gitee_api -X PATCH \
+  --data-urlencode "access_token=$GITEE_TOKEN" \
+  --data-urlencode "name=$REPO" \
+  --data-urlencode "description=$DESC" \
+  --data-urlencode "homepage=$UPSTREAM" \
+  "https://gitee.com/api/v5/repos/$GITEE_OWNER/$REPO" -o /dev/null || true
 
 echo "[4/7] 提交与打标签"
 git config user.name >/dev/null 2>&1 || git config user.name "$GH_OWNER"
@@ -130,11 +146,21 @@ if git diff --cached --quiet; then
 else
   git commit -m "chore(release): $TAG"
 fi
+FORCE_TAG=0
 if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-  echo "  标签 $TAG 已存在，沿用"
+  if [[ "$(git rev-parse "$TAG^{commit}")" != "$(git rev-parse HEAD)" ]]; then
+    # 同一版本内做文档修订时，让 tag 跟着最新提交走，Release 才指向当前内容
+    git tag -f -a "$TAG" -m "$TAG" HEAD >/dev/null
+    FORCE_TAG=1
+    echo "  标签 $TAG 已移动到最新提交"
+  else
+    echo "  标签 $TAG 已存在，沿用"
+  fi
 else
   git tag -a "$TAG" -m "$TAG"
 fi
+TAG_PUSH_OPTS=()
+[[ "$FORCE_TAG" == "1" ]] && TAG_PUSH_OPTS=(--force)
 
 echo "[5/7] 推送到 GitHub 与 Gitee"
 # 本机 MITM 代理偶尔会掐断 TLS 连接，推送失败自动重试 3 次
@@ -149,7 +175,7 @@ push_retry() {
 git remote get-url "$GH_REMOTE" >/dev/null 2>&1 || git remote add "$GH_REMOTE" "git@github.com:$GH_OWNER/$REPO.git"
 git remote get-url "$GITEE_REMOTE" >/dev/null 2>&1 || git remote add "$GITEE_REMOTE" "https://gitee.com/$GITEE_OWNER/$REPO.git"
 push_retry git push "$GH_REMOTE" "HEAD:$BRANCH"
-push_retry git push "$GH_REMOTE" "$TAG"
+push_retry git push "${TAG_PUSH_OPTS[@]}" "$GH_REMOTE" "$TAG"
 
 # 用一次性凭据文件喂给 Gitee，避免把 token 放进命令行或 .git/config
 printf 'https://%s:%s@gitee.com\n' "$GITEE_OWNER" "$GITEE_TOKEN" > "$TMP/git-cred"
@@ -164,7 +190,7 @@ gitee_push() {
     push "$GITEE_REMOTE" "$@"
 }
 push_retry gitee_push "HEAD:$BRANCH"
-push_retry gitee_push "$TAG"
+push_retry gitee_push "${TAG_PUSH_OPTS[@]}" "$TAG"
 # 凭据文件由 trap 统一删除，不在中途单独 rm
 
 echo "[6/7] 发布 GitHub Release（含 zip 附件与免责声明）"
@@ -222,28 +248,44 @@ if ! "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1],encoding="utf-8"));
     "$GITEE_REL_API" -o "$TMP/gitee_release.json" || true
   gitee_api "$GITEE_REL_API?access_token=$GITEE_TOKEN" -o "$TMP/gitee_releases.json" || true
 fi
-REL_INFO=$("$PY" - "$TMP/gitee_releases.json" "$TAG" "$ASSET_NAME" <<'PY'
+GITEE_RID=$("$PY" - "$TMP/gitee_releases.json" "$TAG" <<'PY'
 import json, sys
 try:
     data = json.load(open(sys.argv[1], encoding="utf-8"))
 except Exception:
     data = []
-tag, asset = sys.argv[2], sys.argv[3]
 for r in data:
-    if r.get("tag_name") == tag:
-        has = any(a.get("name") == asset for a in (r.get("assets") or []))
-        print(r["id"], 1 if has else 0)
+    if r.get("tag_name") == sys.argv[2]:
+        print(r["id"])
         break
 else:
-    print("0 0")
+    print("0")
 PY
 )
-read -r GITEE_RID HAS_ASSET <<< "$REL_INFO"
 if [[ "${GITEE_RID:-0}" == "0" ]]; then
   echo "  Gitee Release 未创建成功，请在网页端手动补发（代码与 tag 已同步）"
-elif [[ "$HAS_ASSET" == "1" ]]; then
-  echo "  Gitee Release $TAG 与附件均已存在，跳过"
 else
+  # 正文：新建与已存在都 PATCH，保证两端 Release 与 RELEASE_NOTES.md 逐字一致
+  # （Gitee 的 PATCH 强制要求 tag_name 与 name）
+  gitee_api -X PATCH \
+    --data-urlencode "access_token=$GITEE_TOKEN" \
+    --data-urlencode "tag_name=$TAG" \
+    --data-urlencode "name=$TAG · $REPO" \
+    --data-urlencode "target_commitish=$BRANCH" \
+    --data-urlencode "body@RELEASE_NOTES.md" \
+    "$GITEE_REL_API/$GITEE_RID" -o "$TMP/gitee_release_patch.json" || true
+  echo "  已同步 Gitee Release 正文"
+
+  # 附件：Gitee 同名文件会堆积而非覆盖，先按 id 删掉旧的，再传当前 zip
+  gitee_api "$GITEE_REL_API/$GITEE_RID/attach_files?access_token=$GITEE_TOKEN" \
+    -o "$TMP/gitee_attach_list.json" || true
+  if [[ -s "$TMP/gitee_attach_list.json" ]]; then
+    for aid in $("$PY" -c 'import json,sys; d=json.load(open(sys.argv[1],encoding="utf-8")); print(" ".join(str(a["id"]) for a in d if a.get("name")==sys.argv[2]))' \
+        "$TMP/gitee_attach_list.json" "$ASSET_NAME" 2>/dev/null); do
+      gitee_api -X DELETE --data-urlencode "access_token=$GITEE_TOKEN" \
+        "$GITEE_REL_API/$GITEE_RID/attach_files/$aid" -o /dev/null || true
+    done
+  fi
   gitee_api -X POST \
     -F "access_token=$GITEE_TOKEN" \
     -F "file=@$ZIP;type=application/zip" \
