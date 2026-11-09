@@ -161,9 +161,10 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 
 ## 前置条件
 
-1. **UI 操作能力**：手机无障碍（或等价的屏幕树 / 截图能力），能点、能滚、能读。
-2. **读图能力**：部分 App 详情页只能用图片渲染，需要能读图的模型。
-3. **HTML 与可视化技能**：已随包内置（`vendor/`），无需另装；只有在 `vendor/` 缺失时才退回按 `references/report-spec.md` 自行实现。
+1. **运行平台：安卓优先**。本技能主要给 **DSH go / DeepSeek Harness 的手机端**用（无障碍读屏 + 手机浏览器）；Windows / macOS / Linux 桌面**兼容保留**，能用但不是主场景。涉及屏幕视口、截图、路径这类设备相关的判断，一律先按安卓取，取不到再退桌面。
+2. **UI 操作能力**：手机无障碍（或等价的屏幕树 / 截图能力），能点、能滚、能读。
+3. **读图能力**：部分 App 详情页只能用图片渲染，需要能读图的模型。
+4. **HTML 与可视化技能**：已随包内置（`vendor/`），无需另装；只有在 `vendor/` 缺失时才退回按 `references/report-spec.md` 自行实现。
 
 ## 它能做什么
 
@@ -172,7 +173,7 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - 算实付：标价 + 运费 − 券，写明满减 / 首单 / 新人 / 地区门槛；标价最低 ≠ 实付最低。
 - 前 N 名深挖（默认 3）：发货地、默认快递、发货承诺、到货预估，能问客服就问并保留原话。
 - 药品专项：只认「国药准字 + OTC/RX」，默认排除妆字号 / 食字号 / 健字号 / 消字号 / 械字号。
-- 交付报告：单文件 HTML，按**实际设备的手机与桌面视口**分别自检——视口尺寸现场探测（命令查屏幕 / 按机型查资料），不写死任何比例或像素。
+- 交付报告：单文件 HTML，按**实际设备的安卓手机 + 桌面视口**分别自检——视口尺寸现场探测（安卓优先：`adb shell wm size` + `wm density` 换算逻辑分辨率；取不到再查桌面屏幕或该机型资料），不写死任何比例或像素。
 - **版本自检**：每次任务交付后，在结尾追加一行版本状态（当前 / 最新 / 是否落后）；落后时说明差距、用一两句话讲清改了什么，并问你是否一键升级（规则见 `SKILL.md` 末尾）。
 
 ## 目录结构
@@ -387,6 +388,8 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 ## What it is
 
 A **methodology for AI Agents**: using accessibility-based screen reading on a phone or browser, an Agent visits each platform, records the real out-of-pocket price, shipping origin and delivery estimate, then produces a single-file HTML report self-checked on two viewports (phone + laptop) measured from the user's real device, never from hard-coded pixel sizes.
+
+**Platform: Android first.** This Skill is primarily built for the Android side of DSH go / DeepSeek Harness (accessibility screen reading + the phone browser). Windows / macOS / Linux are **kept as compatible fallbacks** — they work, but they are not the main scenario. Anything device-dependent (viewports, screenshots, paths) is resolved Android-first, desktop second.
 
 It is **not** a crawler library, **not** a price API, **not** an automation script. There is no price-collection code in this repository and there never will be.
 

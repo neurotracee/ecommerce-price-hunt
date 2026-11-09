@@ -231,6 +231,11 @@ for _bad in ("--desktop 1440x960", "--mobile 1080x2376", "--mobile 480x1056",
 require("逻辑分辨率" in _skill, "SKILL.md 缺少「逻辑分辨率」的视口探测说明")
 require("缺省视口" in _skill, "SKILL.md 缺少「取不到实际视口时用缺省并注明」的兜底规则")
 require("一律作废" in _skill, "SKILL.md 未声明上游写死的两档屏幕适配作废")
+# 平台定位：安卓优先（主要宿主 DSH go 手机端），桌面兼容保留
+require("adb shell wm size" in _skill, "SKILL.md 缺少安卓视口探测命令（adb shell wm size）")
+require("主要运行平台：安卓" in _skill, "SKILL.md 缺少「主要运行平台：安卓」的定位说明")
+require(_skill.index("adb shell wm size") < _skill.index("Win32_VideoController"),
+        "SKILL.md 的视口探测顺序不对：安卓（adb）必须排在桌面（Windows）之前")
 require("越界请求怎么答" in _skill, "SKILL.md 缺少「越界请求怎么答」安全边界")
 require("与本项目及作者无关" in _skill,
         "SKILL.md 缺少越界请求的风险提示（须声明与项目/作者无关）")
