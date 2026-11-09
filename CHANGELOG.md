@@ -15,6 +15,7 @@
 - 改为**现场探测、安卓优先**：① 安卓 `adb shell wm size`（有 `Override size` 以 override 为准，分屏/挖孔/手势条会改可视区）+ `wm density`，**逻辑宽 = 物理宽 × 160 ÷ dpi**；无 adb 时读 `getprop ro.sf.lcd_density` 或用宿主无障碍/截图量可视区；② 桌面三平台兜底（Windows 主屏工作区 / `Win32_VideoController` ÷ 缩放、macOS `system_profiler`、Linux `xrandr`）；③ 按用户机型查资料（注意刘海/灵动岛/挖孔）；④ 都取不到才用保守缺省（安卓竖屏约 393×873、桌面约 1440×900），并在报告「局限」**明确注明是缺省视口、非用户真实设备**。
 - **自检方式也按平台分**：安卓端一般跑不了 Playwright，改为真机自检——`python3 -m http.server` 起服务在手机浏览器打开，**竖屏看一遍 → 横屏/桌面版再看一遍**，`adb exec-out screencap -p` 留证；有 Chrome 远程调试时 `adb forward tcp:9222 localabstract:chrome_devtools_remote` 走 CDP 设视口截图。桌面/服务器有 Playwright 才跑随包 `shot.py`。
 - 报告「局限」除自检方式外，还要写**实际用的两个视口 + 视口来源**（安卓探测 / 桌面探测 / 机型查询 / 缺省）。
+- **备用方法（同版本内新增）**：探测命令拿不到或拿不全时，先用跨系统命令查出设备**品牌与型号**（安卓 `getprop ro.product.brand` + `ro.product.model`；Windows `wmic csproduct get vendor,name`；macOS `system_profiler SPHardwareDataType`；Linux `cat /sys/class/dmi/id/product_name`），再**联网搜索**该型号的屏幕规格（分辨率 / 尺寸 / 系统缩放），换算成逻辑分辨率后定视口；`SKILL.md`、`references/report-spec.md`、`README.md`（中英）、`RELEASE_NOTES.md`（中英）同步。
 - 断点说明里「避免 1440×960 被误判成竖屏」改为「避免宽而矮的桌面窗口（接近 3:2、4:3 的显示器）被误判成竖屏」。
 - `scripts/validate.py` 新增防回退校验：`SKILL.md` 出现 `--desktop 1440x960` / `--mobile 1080x2376` / `--mobile 480x1056` / 「手机 2.2:1 与笔记本 1.5:1」任一即报错；必须含「逻辑分辨率」「缺省视口」「一律作废」；必须含安卓探测命令 `adb shell wm size`；且 **adb 必须排在 `Win32_VideoController` 之前**（防有人把桌面写回首位）。
 

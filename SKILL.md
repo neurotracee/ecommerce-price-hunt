@@ -67,7 +67,12 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 - **视口以实际设备为准，绝不写死比例**：每个人的屏幕都不一样，套用固定像素或固定宽高比等于没检查。**随包技能里「默认屏幕适配」写的那两档（约 1440×960 / 约 1080×2376、2.2:1）是上游作者自己的设备，一律作废，不许照抄**（冲突时以本节为准，见 `vendor/README.md` 第 5 条）。自检要两档（手机竖屏 + 桌面），**探测顺序以安卓优先**——本技能的主要宿主 DSH go 跑在手机上：
   1. **安卓（首选，主要宿主）**：`adb shell wm size` 取物理尺寸（有 `Override size` 时以 override 为准，分屏/挖孔/导航栏都会改可视区）+ `adb shell wm density` 取 dpi，**逻辑宽 = 物理宽 × 160 ÷ dpi，逻辑高同理**——这个逻辑尺寸才是浏览器视口。没有 adb 就读 `getprop ro.sf.lcd_density` 配合 `wm size`，或直接用宿主自带的无障碍/截图能力量当前屏幕可视区。
   2. **桌面三平台（兼容保留，报告要在电脑上看时用）**：Windows 读主屏工作区（`System.Windows.Forms.Screen::PrimaryScreen.Bounds`），要更细就读 `Win32_VideoController` 分辨率 ÷ 系统缩放 = 逻辑分辨率；macOS 用 `system_profiler SPDisplaysDataType`；Linux 用 `xrandr`。
-  3. **按型号查资料**：用户给了手机/电脑型号就直接检索该型号的逻辑分辨率与宽高比（注意刘海/灵动岛/挖孔、系统栏占掉的可视区），不要凭印象估。
+  3. **备用方法：先查品牌型号，再联网搜屏幕参数（跨系统通用）**：上面的探测命令拿不到或拿不全时，先用命令问出「这是谁的、什么型号」，把「品牌 + 型号」拼起来直接**联网搜索**它的屏幕规格（分辨率 / 尺寸 / 系统缩放 / 宽高比），以官方参数为准，换算成逻辑分辨率再定视口（别把物理像素当视口用）：
+     - 安卓：`getprop ro.product.brand`（品牌）+ `getprop ro.product.model`（型号，如 `2210132C`）；
+     - Windows：`wmic csproduct get vendor,name`（整机厂商与型号；显示器型号可再查 `root\wmi` 下的 `WmiMonitorID`）；
+     - macOS：`system_profiler SPHardwareDataType`（机型标识）+ `system_profiler SPDisplaysDataType`（显示器型号）；
+     - Linux：`cat /sys/class/dmi/id/product_name`（或 `hostnamectl`）；显示器看 `xrandr --verbose` 输出的名称。
+     注意刘海/灵动岛/挖孔、系统栏占掉的可视区，不要凭印象估。
   4. **都取不到时**：才用通用保守值（安卓竖屏约 `393x873`、桌面约 `1440x900`），并在报告「局限」里**明确写「本次为缺省视口，非你的真实设备」**，不许冒充实际设备。
 - 定好视口再自检，**安卓上优先真机自检**（安卓一般跑不了 Playwright）：把 HTML 用 `python3 -m http.server` 起本地服务或用 `content://` 在手机浏览器/WebView 打开，**竖屏看一遍 → 切横屏或浏览器「桌面版」再看一遍**，`adb exec-out screencap -p > shot.png` 截图留证（或让宿主用自带截图能力）；有 Chrome 远程调试时 `adb forward tcp:9222 localabstract:chrome_devtools_remote` 走 CDP 设视口截图。桌面/服务器上有 Playwright 才跑随包脚本：`python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop <桌面宽>x<桌面高> --mobile <手机宽>x<手机高>`，要求 `error=0`、横向溢出 0。**尺寸都是现场算出来的，不是抄来的**。两种方式都跑不动就用宿主截图或手工两档检查；报告「局限」里写清**用了哪两个视口、视口怎么来的、用哪种方式自检**（真机 / shot.py / 缺省）；
 - 最终回复 ≤300 字、≤8 行，只讲结论与该看哪一节。

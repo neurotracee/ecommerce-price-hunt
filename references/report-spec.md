@@ -22,7 +22,7 @@
 
 1. **安卓（首选）**：`adb shell wm size` 拿物理尺寸（出现 `Override size` 时以 override 为准——分屏、挖孔、手势条都会改变可视区）；`adb shell wm density` 拿 dpi；**逻辑宽 = 物理宽 × 160 ÷ dpi**，逻辑高同理，这个逻辑尺寸才是浏览器视口。没有 adb 时读 `getprop ro.sf.lcd_density` 配合 `wm size`，或让宿主用自带的无障碍 / 截图能力直接量当前可视区。
 2. **桌面三平台（兼容保留）**：Windows 读主屏工作区（`System.Windows.Forms.Screen::PrimaryScreen.Bounds`），要更细就读 `Get-CimInstance Win32_VideoController` 的分辨率 ÷ 系统缩放 = **逻辑分辨率**；macOS 用 `system_profiler SPDisplaysDataType`；Linux 用 `xrandr`。
-3. **按机型查资料**：用户说了手机/电脑型号，就检索该型号的**逻辑分辨率与宽高比**（注意刘海屏 / 灵动岛 / 挖孔、系统栏占用的可视区），别凭印象估。
+3. **备用：先查品牌型号，再联网搜屏幕参数（跨系统通用）**：探测命令拿不到时，先用命令问出品牌与型号，拼起来联网搜它的屏幕规格（分辨率 / 尺寸 / 缩放），换算成逻辑分辨率再用——安卓 `getprop ro.product.brand` + `getprop ro.product.model`；Windows `wmic csproduct get vendor,name`；macOS `system_profiler SPHardwareDataType`；Linux `cat /sys/class/dmi/id/product_name`。
 4. **兜底**：都取不到时才用通用保守值（安卓竖屏 ≈ `393x873`、桌面 ≈ `1440x900`），并**必须在报告「局限」里注明是缺省视口**。
 
 手机档取**竖屏**且以真实安卓机为准；桌面档取**当前实际窗口或整屏的逻辑尺寸**；两档的宽高比就是设备真实比例，不做人为美化。报告可能被转发到电脑上看，所以桌面档不能省——但桌面尺寸同样要探测，不许套模板。

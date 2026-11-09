@@ -173,7 +173,7 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - 算实付：标价 + 运费 − 券，写明满减 / 首单 / 新人 / 地区门槛；标价最低 ≠ 实付最低。
 - 前 N 名深挖（默认 3）：发货地、默认快递、发货承诺、到货预估，能问客服就问并保留原话。
 - 药品专项：只认「国药准字 + OTC/RX」，默认排除妆字号 / 食字号 / 健字号 / 消字号 / 械字号。
-- 交付报告：单文件 HTML，按**实际设备的安卓手机 + 桌面视口**分别自检——视口尺寸现场探测（安卓优先：`adb shell wm size` + `wm density` 换算逻辑分辨率；取不到再查桌面屏幕或该机型资料），不写死任何比例或像素。
+- 交付报告：单文件 HTML，按**实际设备的安卓手机 + 桌面视口**分别自检——视口尺寸现场探测（安卓优先：`adb shell wm size` + `wm density` 换算逻辑分辨率；取不到再查桌面屏幕；**备用方法**：用跨系统命令查出设备品牌与型号，联网搜它的屏幕参数），不写死任何比例或像素。
 - **版本自检**：每次任务交付后，在结尾追加一行版本状态（当前 / 最新 / 是否落后）；落后时说明差距、用一两句话讲清改了什么，并问你是否一键升级（规则见 `SKILL.md` 末尾）。
 
 ## 目录结构
@@ -389,7 +389,7 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 
 A **methodology for AI Agents**: using accessibility-based screen reading on a phone or browser, an Agent visits each platform, records the real out-of-pocket price, shipping origin and delivery estimate, then produces a single-file HTML report self-checked on two viewports (phone + laptop) measured from the user's real device, never from hard-coded pixel sizes.
 
-**Platform: Android first.** This Skill is primarily built for the Android side of DSH go / DeepSeek Harness (accessibility screen reading + the phone browser). Windows / macOS / Linux are **kept as compatible fallbacks** — they work, but they are not the main scenario. Anything device-dependent (viewports, screenshots, paths) is resolved Android-first, desktop second.
+**Platform: Android first.** This Skill is primarily built for the Android side of DSH go / DeepSeek Harness (accessibility screen reading + the phone browser). Windows / macOS / Linux are **kept as compatible fallbacks** — they work, but they are not the main scenario. Anything device-dependent (viewports, screenshots, paths) is resolved Android-first, desktop second. **Fallback method**: when the probing commands fail, query the device brand and model with cross-platform commands (Android `getprop ro.product.brand`/`ro.product.model`, Windows `wmic csproduct get vendor,name`, macOS `system_profiler SPHardwareDataType`, Linux `cat /sys/class/dmi/id/product_name`), then look up that model's screen specs online.
 
 It is **not** a crawler library, **not** a price API, **not** an automation script. There is no price-collection code in this repository and there never will be.
 
