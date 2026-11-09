@@ -82,7 +82,7 @@
 
 DSH 会自己解压、把 `ecommerce-price-hunt/` 放进本地技能目录，装完把路径告诉你。之后直接说「开始针对〈品牌 商品 规格〉做全网比价，出 HTML 报告，我收货地在〈省 市〉」就能触发本 Skill。
 
-> ⭐ **用着顺手的话，回来点一颗 Star 就是最实在的回报**——不花钱，比打赏更有用，别人才搜得到。
+> ⭐ **用着顺手的话，回来点一颗 Star 就是最实在的回报**——不花钱，比打赏更有用；**Star 和赞赏越多，作者越有动力更新与维护**。
 > [GitHub 点 Star](https://github.com/neurotracee/ecommerce-price-hunt) · [Gitee 点 Star](https://gitee.com/bio234/ecommerce-price-hunt)
 > 两个仓库的 Star 各算各的，**从哪边看到都建议顺手去另一边也点一颗**（对作者是鼓励，也让更多人发现它）；赞赏码在文末，完全自愿。
 
@@ -262,7 +262,7 @@ ecommerce-price-hunt/
 
 **点一颗 Star，比打赏更有用。**
 
-不想花钱完全没问题：点一颗 **Star** 就是最好的支持——Star 多了，别人才搜得到，作者也更有动力继续更新平台手册和坑位记录。
+不想花钱完全没问题：点一颗 **Star** 就是最好的支持——Star 多了，别人才搜得到；而 **Star 和赞赏越多，作者越有动力更新与维护**。前面说过，这是个低频维护的项目（作者还是学生）：你们的每一次支持，都会直接影响作者隔多久回来把平台改版、新踩到的坑补进手册。
 
 > 🔁 **小请求：不管你是从哪个仓库看到这个项目的，都顺手到对面那个仓库也点一颗 Star。**
 > 两个仓库的 Star 数、搜索权重和推荐位是**各自独立**的：在 GitHub 点了，Gitee 那边的访客看不到；在 Gitee 点了，GitHub 那边也不涨。两边各点一下等于帮这个项目多开一扇门——既是对作者的鼓励，也能让更多正在找比价方法的人发现它。当然，只点一边也完全没问题，方便为先。
@@ -270,7 +270,7 @@ ecommerce-price-hunt/
 - GitHub 点 Star：<https://github.com/neurotracee/ecommerce-price-hunt>
 - Gitee 点 Star：<https://gitee.com/bio234/ecommerce-price-hunt>
 
-如果这个 Skill 确实帮你少烧了 token、少返工了几轮，也可以扫码请作者喝杯奶茶 🧋——**完全自愿**，不打赏一样免费、功能不缺、更新照常。
+如果这个 Skill 确实帮你少烧了 token、少返工了几轮，也可以扫码请作者喝杯奶茶 🧋——**完全自愿**，不打赏一样免费、功能不缺、更新照常。赞赏和 Star 一样都是更新的燃料：收到的支持越多，作者下次回来翻平台手册、补坑位记录的时候就越有劲。
 
 ![微信赞赏码](images/wechat-donate.png)
 
@@ -363,7 +363,7 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 
    *("Install it into my local directory for me — I want to add it in.")* DSH unzips it into the local skills folder and reports the path.
 
-> ⭐ **If it works well for you, a Star is the most useful way to say thanks** — it costs nothing, helps more people find the project, and beats a tip.
+> ⭐ **If it works well for you, a Star is the most useful way to say thanks** — it costs nothing and beats a tip; **the more stars and tips come in, the more motivated the author is to keep updating and maintaining the project**.
 > [Star on GitHub](https://github.com/neurotracee/ecommerce-price-hunt) · [Star on Gitee](https://gitee.com/bio234/ecommerce-price-hunt)
 > The two repositories count stars separately, so **whichever side you are on, please also star the other one** (it encourages the author and helps others discover it). The tip QR is at the end of this section — entirely optional.
 
@@ -480,7 +480,7 @@ Upstream [DSH go](https://github.com/ccch1mneyyy/dsh-go/) is AGPL-3.0. This proj
 
 **A star beats a tip.**
 
-If you don't feel like paying anything, that's completely fine: a **star** is the best support — more stars mean more people find the project, and it keeps the author motivated to update the platform playbooks and pitfall notes.
+If you don't feel like paying anything, that's completely fine: a **star** is the best support — more stars mean more people find the project, and **the more stars and tips come in, the more motivated the author is to keep updating and maintaining it**. As stated earlier, this is a low-frequency-maintenance project (the author is still a student): every bit of support directly affects how soon the author comes back to fold platform redesigns and newly hit pitfalls into the playbooks.
 
 > 🔁 **One small request: whichever repository you found this project on, please also drop a star on the other one.**
 > The two repositories count stars, search ranking and recommendations **completely independently**: a star on GitHub is invisible to visitors on Gitee, and vice versa. Starring both opens one more door for the project — it encourages the author and helps more people who are looking for a comparison method actually find it. Of course, one star alone is perfectly fine too — convenience comes first.
@@ -488,7 +488,7 @@ If you don't feel like paying anything, that's completely fine: a **star** is th
 - Star on GitHub: <https://github.com/neurotracee/ecommerce-price-hunt>
 - Star on Gitee: <https://gitee.com/bio234/ecommerce-price-hunt>
 
-If this Skill genuinely saved you tokens and re-runs, you can also scan the QR code to buy the author a bubble tea 🧋 — **entirely voluntary**. No tip means no difference: it stays free, nothing is locked, and updates keep coming.
+If this Skill genuinely saved you tokens and re-runs, you can also scan the QR code to buy the author a bubble tea 🧋 — **entirely voluntary**. No tip means no difference: it stays free, nothing is locked, and updates keep coming. Like stars, tips are fuel for maintenance: the more support comes in, the more energy goes into the next round of playbook updates.
 
 ![WeChat tip QR code](images/wechat-donate.png)
 
