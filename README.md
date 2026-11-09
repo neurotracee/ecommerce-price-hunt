@@ -221,6 +221,17 @@ ecommerce-price-hunt/
 
 **技能自己也会守这条线**：遇到越界请求（群控、刷单、抢购、批量爬取、绕过验证码或风控等），它会**直接拒绝、只给合规替代，不提供任何变通或「换个说法」的方案**，并附一句风险提示——这类操作可能违反平台协议与相关法律，**是否继续由使用者自行判断并承担后果，与本项目及作者无关**。
 
+## 什么时候不该用（不适用场景 / 负边界）
+
+本技能只做「**同一目标商品**在**多个平台**之间的到手价比价」。下面这些不在范围内，技能本身也不会（也不应该）被触发，宿主会按普通问答直接处理：
+
+- **单平台内**查价 / 凑单 / 领券 / 比店内价——没有「全网」；
+- **无比价诉求**的购物咨询——「值不值 / 好不好 / 怎么选 / 有什么推荐」；
+- **非标价格类目**——二手、拍卖、租房、雇人、课程、代练等虚拟/服务商品；
+- **金融产品「比价」**——基金、股票、理财、保险；那是投资建议，本技能不做；
+- **价格历史与降价监控**——没有价格数据库，爬取也被禁止；
+- **需要即时成交的**——秒杀抢购、代下单（见上方禁止用途）。
+
 ## 设计取舍
 
 - **不做自动化抓取**：走真实 App UI，价格与活动（大促、百亿补贴、券后）都能看到；代价是慢，且强依赖设备状态。
@@ -452,6 +463,17 @@ Recommended ceiling: ≤30 links and ≤3 deeply-examined platforms per task. Re
 > These are **usage rules**, distinct from the **copyright license** above: the license lets you use this project commercially; it does not let you do any of the things listed here.
 
 **The Skill enforces this line itself**: on an out-of-scope request (device farms, fake orders, flash-sale grabbing, bulk scraping, bypassing CAPTCHAs or risk controls), it **refuses outright, offers only compliant alternatives, and never supplies workarounds or a reworded route to the same thing** — plus one risk notice: such actions may breach platform terms and the law, and **whether to proceed is the user's own decision and responsibility, unrelated to this project or its author**.
+
+## When NOT to use it (negative boundary)
+
+This Skill only compares the **out-of-pocket price of one target item across multiple platforms**. The following are out of scope, and the Skill will not (and should not) be triggered — the host just answers normally:
+
+- **Within a single platform**: price checks, coupon stacking or in-store comparisons — no "across stores" involved;
+- **No comparison intent**: general shopping advice ("is it worth it / which should I pick / any recommendations");
+- **Non-standardised pricing**: second-hand goods, auctions, rentals, hiring, courses and similar services — unit-price math does not apply;
+- **"Comparison" of financial products** (funds, stocks, insurance) — that is investment advice, which this Skill never gives;
+- **Price history and drop monitoring** — there is no price database, and scraping is prohibited;
+- **Instant-purchase actions** — flash-sale grabbing or ordering on someone's behalf (see prohibited uses above).
 
 ## Releases
 

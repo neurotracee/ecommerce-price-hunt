@@ -8,6 +8,15 @@
 
 **功能版本：HTML 报告改为「随包技能驱动」，不再依赖宿主的 HTML 技能。**
 
+### 文档修订（同版本内）· 对齐 Agent Skills 规范：补「负边界声明」
+
+- 按 Agent Skills 规范自查（SKILL.md 唯一入口 + YAML frontmatter + 标准目录、description 触发、渐进式披露、负边界声明、降级策略）：前四项此前已具备，本次补齐缺口——**负边界声明**。
+- `SKILL.md` 新增「**不适用于（负边界：这些任务别触发本技能）**」：单平台内查价/凑单、无比价诉求的购物咨询、二手/服务类非标品、金融产品「比价」、价格历史与监控、秒杀代下单——一律不触发、不硬套流程；拿不准时先问「多平台之间还是单平台里」。frontmatter 的 `description` 末尾同步加「不适用于」提示（触发机制层面就排除误命中）。
+- `README.md` 中英新增「**什么时候不该用（不适用场景 / 负边界）** / When NOT to use it (negative boundary)」。
+- 与「禁止用途」的分工：**禁止用途 = 道德与法律红线**（违规也不做），**不适用于 = 任务类型不匹配**（不是这个技能的活，避免宿主误触发、白烧 token）。
+- `scripts/validate.py` 新增校验：`SKILL.md` 必须含「## 不适用于」，frontmatter `description` 必须含「不适用于」。
+- 规范中其余条目（Remotion 同源、Office 能力重叠、平台统计等）与本技能无关，**不引入**。
+
 ### 文档修订（同版本内）· 屏幕视口不再写死，且**以安卓优先**
 
 - **平台定位补正**：本技能主要给 DSH go / DeepSeek Harness 的**安卓手机端**用（无障碍读屏 + 手机浏览器），Windows / macOS / Linux **兼容保留**。`SKILL.md` 顶部、`README.md`（中英）、`docs/portability.md`（新增「平台优先顺序」表）同步写明。

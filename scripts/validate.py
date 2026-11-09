@@ -239,6 +239,10 @@ require(_skill.index("adb shell wm size") < _skill.index("Win32_VideoController"
 require("越界请求怎么答" in _skill, "SKILL.md 缺少「越界请求怎么答」安全边界")
 require("与本项目及作者无关" in _skill,
         "SKILL.md 缺少越界请求的风险提示（须声明与项目/作者无关）")
+# 负边界声明（Agent Skills 规范：写明「不适用于」）
+require("## 不适用于" in _skill, "SKILL.md 缺少「不适用于」负边界声明")
+require(_skill.split("description:")[1].split("\n")[0].count("不适用于") >= 1,
+        "SKILL.md frontmatter 的 description 缺少「不适用于」负边界提示")
 require("先把比价任务做完" in _skill, "SKILL.md 缺少「先交付任务、再检查更新」的顺序要求")
 
 # ------------------------------------------- 5c. license & upstream metadata
