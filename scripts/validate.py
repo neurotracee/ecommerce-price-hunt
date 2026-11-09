@@ -243,6 +243,11 @@ require("与本项目及作者无关" in _skill,
 require("## 不适用于" in _skill, "SKILL.md 缺少「不适用于」负边界声明")
 require(_skill.split("description:")[1].split("\n")[0].count("不适用于") >= 1,
         "SKILL.md frontmatter 的 description 缺少「不适用于」负边界提示")
+# 确认页运费核对：走到支付按钮前一步、不点支付；拼多多默认包邮的例外要写明
+require("订单确认页" in _skill and "绝不点「提交订单 / 立即支付」" in _skill,
+        "SKILL.md 缺少「走到订单确认页但不点支付」的规则")
+require("拼多多大概率无需" in _skill,
+        "SKILL.md 缺少「拼多多默认包邮、无需特意核运费」的平台例外说明")
 require("先把比价任务做完" in _skill, "SKILL.md 缺少「先交付任务、再检查更新」的顺序要求")
 
 # ------------------------------------------- 5c. license & upstream metadata
