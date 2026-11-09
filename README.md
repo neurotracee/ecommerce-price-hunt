@@ -172,7 +172,7 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 - 算实付：标价 + 运费 − 券，写明满减 / 首单 / 新人 / 地区门槛；标价最低 ≠ 实付最低。
 - 前 N 名深挖（默认 3）：发货地、默认快递、发货承诺、到货预估，能问客服就问并保留原话。
 - 药品专项：只认「国药准字 + OTC/RX」，默认排除妆字号 / 食字号 / 健字号 / 消字号 / 械字号。
-- 交付报告：单文件 HTML，手机 2.2:1 与笔记本 1.5:1 双屏分别自检。
+- 交付报告：单文件 HTML，按**实际设备的手机与桌面视口**分别自检——视口尺寸现场探测（命令查屏幕 / 按机型查资料），不写死任何比例或像素。
 - **版本自检**：每次任务交付后，在结尾追加一行版本状态（当前 / 最新 / 是否落后）；落后时说明差距、用一两句话讲清改了什么，并问你是否一键升级（规则见 `SKILL.md` 末尾）。
 
 ## 目录结构
@@ -191,7 +191,7 @@ ecommerce-price-hunt/
 │   ├── platform-playbooks.md      # 各平台入口 / 排序 / 标签位置 / 已知坑
 │   ├── screen-reading.md          # 读屏快路、坑与对策、误点防护、数据落地格式
 │   ├── pricing-method.md          # 单价换算、实付公式、券门槛、风险标记
-│   └── report-spec.md             # 报告 10 章节、双屏断点、自检清单
+│   └── report-spec.md             # 报告 10 章节、视口探测、自检清单
 ├── vendor/                        # 随包内置的可视化 / HTML 技能（写报告前必读）
 │   ├── answer-visualization-preference/SKILL.md
 │   ├── html-visualization/html/   # 含 scripts/shot.py 双屏自检
@@ -386,7 +386,7 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 
 ## What it is
 
-A **methodology for AI Agents**: using accessibility-based screen reading on a phone or browser, an Agent visits each platform, records the real out-of-pocket price, shipping origin and delivery estimate, then produces a single-file HTML report self-checked on two viewports (phone + laptop).
+A **methodology for AI Agents**: using accessibility-based screen reading on a phone or browser, an Agent visits each platform, records the real out-of-pocket price, shipping origin and delivery estimate, then produces a single-file HTML report self-checked on two viewports (phone + laptop) measured from the user's real device, never from hard-coded pixel sizes.
 
 It is **not** a crawler library, **not** a price API, **not** an automation script. There is no price-collection code in this repository and there never will be.
 
@@ -399,7 +399,7 @@ It is **not** a crawler library, **not** a price API, **not** an automation scri
 | Compares different package sizes directly | Normalise to ¥/g, ¥/ml, ¥/tablet; split multi-packs; never mix specs | Avoids scrapping the whole table |
 | Mixes medicines with cosmetics / supplements | Step 0 category gate; medicine gate for 国药准字, exclude 妆/食/健/消/械 by default | Avoids unusable or risky output |
 | Dumps every playbook into context | On-demand loading table per scenario | Directly cuts input tokens per turn |
-| Redesigns the report every run | Fixed 10 sections + column definitions + dual-screen checklist | Cuts layout iterations and screenshot rounds |
+| Redesigns the report every run | Fixed 10 sections + column definitions + viewport-probing checklist | Cuts layout iterations and screenshot rounds |
 | Guesses a number when the screen can't be read | No guessing; log it under "limitations"; separate inference from observation | Avoids hallucination and trust cost |
 | Pushes past app locks / CAPTCHAs | Always hand off to the user; never bypass | Avoids dead ends and policy violations |
 

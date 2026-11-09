@@ -15,17 +15,30 @@
 10. **数据说明与局限**：采集时间、方法、口径、读不到的部分。
 
 ## 自检
-自检脚本随包提供，直接用相对路径调用（无需安装任何宿主技能）：
+
+### 第一步：定视口（不写死比例，以实际为准）
+
+**不要沿用任何固定像素或固定宽高比**——每个人的屏幕都不一样，照抄别人的尺寸等于没检查。按优先级取实际值：
+
+1. **命令探测本机屏幕**：Windows 用 PowerShell 读主屏工作区（`System.Windows.Forms.Screen::PrimaryScreen.Bounds`）；要更细就读 `Get-CimInstance Win32_VideoController` 的分辨率，再按系统缩放百分比换算**逻辑分辨率**。macOS 用 `system_profiler SPDisplaysDataType`；Linux 用 `xrandr`。
+2. **按机型查资料**：用户说了手机/电脑型号，就检索该型号的**逻辑分辨率与宽高比**（注意刘海屏/灵动岛、系统栏占用的可视区），别凭印象估。
+3. **兜底**：都取不到时才用通用保守值（手机 ≈ `390x844`、桌面 ≈ `1440x900`），并**必须在报告「局限」里注明是缺省视口**。
+
+手机档取**竖屏**，桌面档取**当前实际窗口或整屏的逻辑尺寸**；两档的宽高比就是设备真实比例，不做人为美化。
+
+### 第二步：跑脚本
+
+脚本随包提供，直接用相对路径调用（无需安装任何宿主技能）：
 
 ```bash
-python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop 1440x960 --mobile 1080x2376 --format-report summary
-python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --only mobile --mobile 480x1056 --outdir _shots480 --format-report summary
+python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop <桌面宽>x<桌面高> --mobile <手机宽>x<手机高> --format-report summary
+python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --only mobile --mobile <手机宽>x<手机高> --outdir _shots --format-report summary
 ```
 
 要求 error=0；`misalignedBlocks` 多为误报（子元素与 grid 宽度对比），横向溢出 `horizontalOverflow` 必须清零。
 
-脚本跑不动时（缺 Playwright/Chromium 等依赖），用宿主截图能力或手工把浏览器调到手机 2.2:1 与笔记本 1.5:1 两档，逐节检查：横向溢出为 0、表格不挤成竖条、图表容器有高度、文字不被裁切；并在报告「局限」里注明自检方式。移植说明见 `docs/portability.md`，随包技能说明见 `vendor/README.md`。
+脚本跑不动时（缺 Playwright/Chromium 等依赖），用宿主截图能力，或手工把窗口调到上面定好的两档，逐节检查：横向溢出为 0、表格不挤成竖条、图表容器有高度、文字不被裁切；并在报告「局限」里注明**自检方式 + 实际用的两个视口 + 视口来源**（探测 / 机型查询 / 缺省）。移植说明见 `docs/portability.md`，随包技能说明见 `vendor/README.md`。
 
-窄屏一律卡片列表、横屏才用表格；断点用 `(min-width: …) and (min-aspect-ratio: 5/4)`，避免 1440×960 被误判成竖屏。
+窄屏一律卡片列表、横屏才用表格；断点用 `(min-width: …) and (min-aspect-ratio: 5/4)`，避免**宽而矮的桌面窗口**（接近 3:2、4:3 的显示器）被误判成竖屏。
 
 > 对**本地生成的 HTML 文件**做渲染自检属于交付质量检查，与对电商平台做自动采集是两回事；后者在本项目中被明确禁止。

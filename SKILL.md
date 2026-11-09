@@ -63,7 +63,11 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 正文与产物仍守这些底线（细节以两个随包技能为准）：
 - 单文件自包含、语义化标题与非 `index.html` 文件名、原生 JS、CSS 内联；
 - 图表库（如 ECharts）内联或本地引用，不依赖会过期的外链；示例数据必须标注「示例」；
-- 交付前跑双屏自检（手机 2.2:1、笔记本 1.5:1）：`python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop 1440x960 --mobile 1080x2376`，要求 `error=0`、横向溢出 0；脚本跑不动（缺 Playwright 等依赖）就用宿主截图能力或手工两档窗口检查，并在报告「局限」写明自检方式；
+- **视口以实际设备为准，绝不写死比例**：每个人的屏幕比例都不一样，套用固定像素或固定宽高比等于没检查。自检前先定两档视口（手机竖屏 + 桌面），按下面顺序取，取到即用：
+  1. **命令查本机**：Windows 用 PowerShell 读主屏工作区（`System.Windows.Forms.Screen::PrimaryScreen.Bounds`），需要更细时读 `Win32_VideoController` 的分辨率再按系统缩放百分比换算**逻辑分辨率**；macOS 用 `system_profiler SPDisplaysDataType`；Linux 用 `xrandr`。拿到逻辑宽高与宽高比。
+  2. **按型号查资料**：用户给了手机/电脑型号，就直接检索该型号的逻辑分辨率与宽高比（注意刘海/灵动岛、系统栏占掉的可视区差异），不要凭印象估。
+  3. **都取不到时**：才用通用保守值（手机约 `390x844`、桌面约 `1440x900`），并在报告「局限」里**明确写「本次为缺省视口，非你的真实设备」**，不许冒充实际设备。
+- 定好视口再自检：`python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop <桌面宽>x<桌面高> --mobile <手机宽>x<手机高>`，要求 `error=0`、横向溢出 0。**这两个尺寸是现场算出来的，不是抄来的**。脚本跑不动（缺 Playwright 等依赖）就用宿主截图能力，或手工把窗口调到同样两档检查；报告「局限」里写清**实际用了哪两个视口、视口怎么来的**（探测 / 型号查询 / 缺省）；
 - 最终回复 ≤300 字、≤8 行，只讲结论与该看哪一节。
 
 本技能只补三样：比价章节结构（`references/report-spec.md`）、单价口径（`references/pricing-method.md`）、平台坑位（`references/platform-playbooks.md`）。**样式、组件、图表与自检全部来自上面两个随包技能。**

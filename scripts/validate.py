@@ -222,6 +222,12 @@ for _v in ("vendor/answer-visualization-preference/SKILL.md",
 require("严禁写死" in _skill, "SKILL.md 未禁止写死绝对路径")
 require(".user_skills" not in _skill and "AppData" not in _skill,
         "SKILL.md 出现了本机专属路径，必须改为相对路径 vendor/...")
+# 屏幕比例不许写死：视口必须现场探测（命令查屏幕 / 按机型查资料 / 缺省并注明）
+for _bad in ("2.2:1", "1.5:1", "1440x960", "1080x2376", "480x1056"):
+    require(_bad not in _skill,
+            f"SKILL.md 仍写死了屏幕尺寸/比例（{_bad}）；视口必须按实际设备探测")
+require("逻辑分辨率" in _skill, "SKILL.md 缺少「逻辑分辨率」的视口探测说明")
+require("缺省视口" in _skill, "SKILL.md 缺少「取不到实际视口时用缺省并注明」的兜底规则")
 require("越界请求怎么答" in _skill, "SKILL.md 缺少「越界请求怎么答」安全边界")
 require("与本项目及作者无关" in _skill,
         "SKILL.md 缺少越界请求的风险提示（须声明与项目/作者无关）")
