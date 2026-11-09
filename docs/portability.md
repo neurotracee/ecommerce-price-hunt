@@ -27,18 +27,23 @@
 
 > 若宿主对 frontmatter 有严格校验，只保留 `name` 与 `description` 两个字段，不要添加自定义字段。
 
-## 3. HTML 技能的替换
+## 3. HTML 技能：随包内置，不再依赖宿主
 
-`SKILL.md` 说「报告一律按 App 自带的 html 技能生成」，这是**优先项，不是硬依赖**：
+从 v1.4.0 起，HTML 与可视化能力**随本技能一起分发**，换宿主、换机器都一样：
 
-- **有宿主 HTML 技能**（DSH go 的 `html`、`doubao-visualization` 等）：样式、ECharts 内联、双屏自检全部沿用宿主，本项目只提供 `references/report-spec.md` 的章节结构。
-- **没有 HTML 技能**：按 `references/report-spec.md` 自己实现，至少满足：
+- 必读：`vendor/answer-visualization-preference/SKILL.md`、`vendor/html-visualization/html/SKILL.md`；
+- 按需：`vendor/html-visualization/ai-visualization/SKILL.md`（命中图表/图解分支时）；
+- 自检脚本：`vendor/html-visualization/html/scripts/shot.py`（相对路径调用）。
+
+宿主自带 HTML 技能（DSH go 的 `html` 等）仍然可以叠加使用，但**不再是前提**。`vendor/` 缺失（有人只拷了 `SKILL.md`）时的降级做法：
+
+- 按 `references/report-spec.md` 自己实现，至少满足：
   - 单文件自包含、语义化标题、非 `index.html` 文件名；
   - 窄屏卡片列表、宽屏表格；断点用 `(min-width: …) and (min-aspect-ratio: 5/4)`，避免 1440×960 被误判成竖屏；
   - 手机 2.2:1 与笔记本 1.5:1 各检查一遍，横向溢出必须为 0；
   - 图表可选：`assets/report-skeleton.html` 预留了挂载点，需要图表时自行内联 ECharts（Apache-2.0），本项目不捆绑该文件。
 
-`references/report-spec.md` 里出现的 `~/.dsh/skills/html/scripts/shot.py` 是 DSH go 环境的**示例自检命令**，换成宿主自己的截图/渲染检查即可；没有工具时手工用浏览器在两个窗口尺寸下看一遍，并在报告「局限」注明自检方式。
+随包的 `shot.py` 依赖 Playwright/Chromium；跑不起来就用宿主截图能力或手工在两个窗口尺寸下看一遍，并在报告「局限」注明自检方式。**任何情况下都写相对路径 `vendor/...`，不要写死个人机器上的绝对路径。**
 
 > 说明：对**本地生成的 HTML 文件**做渲染自检，与对**电商平台**做自动采集是两回事。前者是交付质量检查，后者是本项目明确禁止的行为。
 

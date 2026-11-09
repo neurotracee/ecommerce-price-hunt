@@ -39,6 +39,7 @@ INCLUDE = [
 INCLUDE_DIRS = [
     "references",
     "assets",
+    "vendor",
     "docs",
     "examples",
 ]

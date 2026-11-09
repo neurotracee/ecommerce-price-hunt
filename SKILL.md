@@ -1,19 +1,19 @@
 ---
 name: ecommerce-price-hunt
-version: 1.3.0
+version: 1.4.0
 description: 当用户要求针对某个商品或药品做全网比价——例如说「开始针对某某商品进行全网比价」「到各大电商平台看看哪个最划算」「查一下这个药各平台多少钱」并要求价格、性价比、发货地或时效，或要 HTML 比价报告时使用。通用商品走通用流程；目标为药品时自动启用药字号闸门，只认国药准字，排除妆字号/食字号/健字号/消字号/械字号。也用于同一商品多平台比价与最低价前 N 名深挖。
 ---
 
 # 多平台到手价比价
 
 用户一旦说「要针对某某商品做全网比价」或多平台比价，**立即按本技能执行**：
-先判品类（第 0 步），再逐平台采集（第 2 步），最后交付 HTML 报告。
+先判品类（第 0 步），再逐平台采集（第 2 步），最后交付 HTML 报告（**写 HTML 前必须读随包的两个可视化/HTML 技能，见「交付：HTML 报告」**）。
 
 > 本技能来自为 [DSH go](https://github.com/ccch1mneyyy/dsh-go/) 制作的附属功能开源项目（独立作品、非官方组件、不含上游代码）。
 > 用途限制与完整免责声明见仓库 `README.md` 开头；本文件【药品专项】中的用途限制为**强制约束**，不得删改。
 > 授权：文档/提示词 CC BY-SA 4.0、代码/模板 MIT，**任何二次开发、商用、借用均可**，但必须标注两个仓库地址并说明同一作者管理（见 `NOTICE.md`）。
 > **协议 ≠ 用途**：授权放开的是版权层面的使用方式，**不是**对使用场景的免责；本文件下方的硬规则与【药品专项】限制不因商用授权而失效。
-> **本文件对应版本：v1.3.0。** 每次输出都要在结尾带上当前版本并做一次更新检查（见文末「版本自检与升级提示」，只在任务交付后执行，不占用采集 token）。
+> **本文件对应版本：v1.4.0。** 每次输出都要在结尾带上当前版本并做一次更新检查（见文末「版本自检与升级提示」，只在任务交付后执行，不占用采集 token）。
 > 遇到越界请求（群控、刷单、爬取、绕过风控等）一律拒绝并附一句风险提示，**不提供变通方案**，规则见「越界请求怎么答」。
 
 ## 第 0 步：品类判定（决定后面用哪套规则）
@@ -46,13 +46,27 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 逐个核发货地、默认快递（页面标识或客服原话）、发货承诺与到货预估（按用户城市）、包邮门槛；能问客服就问发货地/快递/几天到/可否指定/能否开票。标价低但要运费的，先算实付再排序。
 
 ## 交付：HTML 报告
-**优先复用宿主自带的 html 技能**（DSH go 环境为 `~/.dsh/skills/html/`）；没有该技能时按 `references/report-spec.md` 的章节、断点与自检清单自行实现，宿主映射见 `docs/portability.md`。本技能不另立样式规范：
-- 单文件自包含、语义化标题与非 index 文件名、图表库内联（可选）、原生 JS；
-- 有 html 技能时，写正文前完整读它的 `SKILL.md` 与双屏参考文档；
-- 交付前跑双屏自检（手机 2.2:1、笔记本 1.5:1）：有 `scripts/shot.py` 就用它（error=0），没有则用宿主截图能力或手工两档窗口检查，横向溢出必须为 0，并在报告「局限」注明自检方式；
+
+**写 HTML 之前必须先读随包内置的两个技能，缺一不可**（用**相对路径**，见下）。本技能只负责「比价内容」，排版与可视化一律交给这两个技能，不自己另立一套。
+
+| 写代码前必须完整读 | 相对路径（相对本技能根目录） | 管什么 |
+| --- | --- | --- |
+| 回答可视化偏好 | `vendor/answer-visualization-preference/SKILL.md` | 该不该出图、出何种形态；色块分区 / 进度条 / 箭头因果链；移动端断点与「克制优先」 |
+| HTML 与可视化 | `vendor/html-visualization/html/SKILL.md` | 单文件自包含、语义化文件名与 `present_files` 交付、`scripts/shot.py` 双屏自检 |
+| 数据可视化（按需） | `vendor/html-visualization/ai-visualization/SKILL.md` | 出现趋势/占比/排行/分布/机制/流程/架构等图表分支时，按它的路由再加载对应 `references/` 文件 |
+
+- **两个技能都要读；第三个按需**：报告含精确数值图表、机制/流程图解时才加载 `ai-visualization`，避免每次全量注入浪费 token。
+- **只用相对路径**：`vendor/...`。**严禁写死** `C:\Users\...`、`%LOCALAPPDATA%\...`、`~/.dsh/skills/...`、`/mnt/...` 这类环境专属路径——每台机器、每个宿主都不同，写死必然找不到文件。
+- **`vendor/` 是随包副本，不要就地改**：要改就改上游再重新打包。`vendor/README.md` 里有映射、约定与版权说明。
+- **`vendor/` 缺失时**（例如用户只拷了 `SKILL.md` 等少数文件）：如实说明「缺少随包可视化技能」，退回按 `references/report-spec.md` 的章节、断点与自检清单自行实现，并在报告「局限」注明降级原因，**不要假装读过**。
+
+正文与产物仍守这些底线（细节以两个随包技能为准）：
+- 单文件自包含、语义化标题与非 `index.html` 文件名、原生 JS、CSS 内联；
+- 图表库（如 ECharts）内联或本地引用，不依赖会过期的外链；示例数据必须标注「示例」；
+- 交付前跑双屏自检（手机 2.2:1、笔记本 1.5:1）：`python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop 1440x960 --mobile 1080x2376`，要求 `error=0`、横向溢出 0；脚本跑不动（缺 Playwright 等依赖）就用宿主截图能力或手工两档窗口检查，并在报告「局限」写明自检方式；
 - 最终回复 ≤300 字、≤8 行，只讲结论与该看哪一节。
 
-本技能只补三样东西：比价章节结构（`references/report-spec.md`）、单价口径（`references/pricing-method.md`）、平台坑位（`references/platform-playbooks.md`）；样式与脚本优先沿用宿主 html 技能，没有则按 `report-spec.md` 自行实现。
+本技能只补三样：比价章节结构（`references/report-spec.md`）、单价口径（`references/pricing-method.md`）、平台坑位（`references/platform-playbooks.md`）。**样式、组件、图表与自检全部来自上面两个随包技能。**
 
 章节：结论（大数字 + 3 要点）→ 每平台最低价 → 同平台价差区间 → 前 N 名实付/发货地/时效 → 全量清单（单价升序）→ 平台活动标签 → 三种买法 → 坑 → 数据说明与局限。
 明细列：平台 / 店铺 / 到手价 / 单价 / 销量 / 标签。
@@ -98,7 +112,7 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 | 首次做某平台 | `references/platform-playbooks.md` |
 | 读不到屏幕、误点、页面是图 | `references/screen-reading.md` |
 | 换算、券与运费 | `references/pricing-method.md` |
-| 写报告 | 先读 `references/report-spec.md`；有宿主 html 技能则再完整读它的 `SKILL.md` 与双屏参考文档 |
+| 写报告（出 HTML） | **必读** `vendor/answer-visualization-preference/SKILL.md` + `vendor/html-visualization/html/SKILL.md` + `references/report-spec.md`；报告含图表/图解时再加读 `vendor/html-visualization/ai-visualization/SKILL.md` |
 
 ## 交付检查
 - 每条记录能对上「平台+店铺+规格+价格+时间」？
@@ -114,7 +128,11 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 - `references/screen-reading.md`：读屏快路、坑与对策、误点防护、数据落地格式。
 - `references/pricing-method.md`：单价换算、券与运费、用量/疗程估算。
 - `references/report-spec.md`：报告章节模板、配色、断点、自检清单。
-- `assets/report-skeleton.html`：只含比价章节骨架，样式与脚本可贴宿主 html 技能的写法。
+- `assets/report-skeleton.html`：只含比价章节骨架（示例数据虚构），样式与脚本按随包技能来。
+- `vendor/answer-visualization-preference/`：**随包**的可视化偏好技能（该不该出图、出图形态、设计语言与移动端断点）。
+- `vendor/html-visualization/html/`：**随包**的 HTML 生成技能（单文件自包含、交付规范、`scripts/shot.py` 双屏自检）。
+- `vendor/html-visualization/ai-visualization/`：**随包**的图表/图解路由技能（命中趋势、占比、机制、流程等分支时按需加载）。
+- `vendor/README.md`：随包技能的来源映射、相对路径约定与版权说明（**不要改 vendor 内的内容**）。
 - `docs/portability.md`：宿主能力映射与无 html 技能时的替代做法（**本技能文件之外的移植说明，不需要在每次任务里加载**）。
 - `README.md`：项目定位、DSH go 出处、完整免责声明（首次安装时读一次即可）。
 
@@ -128,7 +146,7 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 
 ## 版本自检与升级提示（每次任务结束都做）
 
-**当前版本：v1.3.0** ｜ 与同目录 `VERSION` 不一致时以 `VERSION` 为准，并在结尾注明「本文件与 VERSION 不一致」
+**当前版本：v1.4.0** ｜ 与同目录 `VERSION` 不一致时以 `VERSION` 为准，并在结尾注明「本文件与 VERSION 不一致」
 **仓库**：GitHub <https://github.com/neurotracee/ecommerce-price-hunt> ｜ Gitee <https://gitee.com/bio234/ecommerce-price-hunt>
 
 1. **顺序不能颠倒**：先把比价任务做完、报告交付完，再反过来做版本检查；检查最多花一次请求，**不得占用采集与写作的 token**。
@@ -141,7 +159,7 @@ description: 当用户要求针对某个商品或药品做全网比价——例�
 
 **每次任务的最终回复结尾固定追加（默认开启；只加在交付那一条回复上，中间过程不重复，一行，不解释）：**
 
-> 📌 ecommerce-price-hunt v1.3.0 · 最新 v{远端或"未查到"}（{来源}）· {已是最新 / 落后 N 个版本，要不要我说明怎么升级？}
+> 📌 ecommerce-price-hunt v1.4.0 · 最新 v{远端或"未查到"}（{来源}）· {已是最新 / 落后 N 个版本，要不要我说明怎么升级？}
 
 **不是最新时，总共多给 3–5 行，不要更长：**
 - **差距**：`vX.Y.Z → vA.B.C`，落后几个版本（或差在哪个位）。

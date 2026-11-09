@@ -1,6 +1,6 @@
 # 比价报告章节与自检
 
-样式、字体、断点、ECharts 写法一律遵循 App 自带 `html` 技能；这里只定「比价报告该有哪些节」。
+样式、字体、断点、图表与交付规范一律遵循**随包内置**的两个技能（`vendor/answer-visualization-preference/SKILL.md`、`vendor/html-visualization/html/SKILL.md`，图表分支再加 `vendor/html-visualization/ai-visualization/SKILL.md`）；本文件只定「比价报告该有哪些节」。**路径一律用相对路径，不要写死任何机器或宿主专属路径。**
 
 ## 章节顺序
 1. **结论 hero**：一个大数字（最低单价元/克）+ 3–4 条要点（最便宜、最稳妥、别买哪里、看单价）。
@@ -15,16 +15,16 @@
 10. **数据说明与局限**：采集时间、方法、口径、读不到的部分。
 
 ## 自检
-下列命令是 **DSH go 环境的示例**（宿主自带 html 技能时）：
+自检脚本随包提供，直接用相对路径调用（无需安装任何宿主技能）：
 
 ```bash
-python3 ~/.dsh/skills/html/scripts/shot.py <报告>.html --desktop 1440x960 --mobile 1080x2376 --format-report summary
-python3 ~/.dsh/skills/html/scripts/shot.py <报告>.html --only mobile --mobile 480x1056 --outdir _shots480 --format-report summary
+python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --desktop 1440x960 --mobile 1080x2376 --format-report summary
+python3 vendor/html-visualization/html/scripts/shot.py <报告>.html --only mobile --mobile 480x1056 --outdir _shots480 --format-report summary
 ```
 
 要求 error=0；`misalignedBlocks` 多为误报（子元素与 grid 宽度对比），横向溢出 `horizontalOverflow` 必须清零。
 
-没有该技能时，用宿主截图能力或手工把浏览器调到手机 2.2:1 与笔记本 1.5:1 两档，逐节检查：横向溢出为 0、表格不挤成竖条、图表容器有高度、文字不被裁切；并在报告「局限」里注明自检方式。宿主映射见 `docs/portability.md`。
+脚本跑不动时（缺 Playwright/Chromium 等依赖），用宿主截图能力或手工把浏览器调到手机 2.2:1 与笔记本 1.5:1 两档，逐节检查：横向溢出为 0、表格不挤成竖条、图表容器有高度、文字不被裁切；并在报告「局限」里注明自检方式。移植说明见 `docs/portability.md`，随包技能说明见 `vendor/README.md`。
 
 窄屏一律卡片列表、横屏才用表格；断点用 `(min-width: …) and (min-aspect-ratio: 5/4)`，避免 1440×960 被误判成竖屏。
 

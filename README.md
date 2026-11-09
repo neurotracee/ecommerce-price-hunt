@@ -64,10 +64,10 @@
 
 **不用 clone 仓库，不用敲命令，也不用在本页翻上翻下找说明。**
 
-**第 1 步｜直接把压缩包下载下来**（技能安装包 `ecommerce-price-hunt-v1.3.0.zip`）：
+**第 1 步｜直接把压缩包下载下来**（技能安装包 `ecommerce-price-hunt-v1.4.0.zip`）：
 
-- GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
-- Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+- GitHub：<https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.4.0/ecommerce-price-hunt-v1.4.0.zip>
+- Gitee（国内更快）：<https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.4.0/ecommerce-price-hunt-v1.4.0.zip>
 
 **第 2 步｜把 zip 交给 DSH**：最稳的是把上面下载到的**文件本身**直接拖进对话框，或作为附件上传；也可以把下载链接发给它、让它自己取（见下方说明）。
 
@@ -157,13 +157,13 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 
 其他 Agent 平台（Claude Code、WorkBuddy、自定义 Harness 等）按各自的 skill / prompt 目录约定放置；没有技能机制时，把 `SKILL.md` 当系统提示词，`references/*.md` 按「按需加载」表注入即可。详见 [docs/portability.md](docs/portability.md)。
 
-> 报告排版在本项目只定「章节结构」，样式与双屏自检优先复用宿主自带的 HTML 技能（DSH go 的 `html` 等）；没有 HTML 技能时按 `references/report-spec.md` 里的断点自行实现。
+> **报告排版不依赖宿主**：HTML 与可视化能力已**随包内置**在 `vendor/` 里（`answer-visualization-preference` 与 `HTML & Visualization` 两个技能），写 HTML 前必须用**相对路径**同时读这两个技能；图表分支再按需读第三个（`ai-visualization`）。换机器、换宿主都能直接跑，不写死任何绝对路径。详见 [`vendor/README.md`](vendor/README.md)。
 
 ## 前置条件
 
 1. **UI 操作能力**：手机无障碍（或等价的屏幕树 / 截图能力），能点、能滚、能读。
 2. **读图能力**：部分 App 详情页只能用图片渲染，需要能读图的模型。
-3. **HTML 技能（可选）**：有则复用，无则按 `references/report-spec.md` 自行实现。
+3. **HTML 与可视化技能**：已随包内置（`vendor/`），无需另装；只有在 `vendor/` 缺失时才退回按 `references/report-spec.md` 自行实现。
 
 ## 它能做什么
 
@@ -192,6 +192,10 @@ ecommerce-price-hunt/
 │   ├── screen-reading.md          # 读屏快路、坑与对策、误点防护、数据落地格式
 │   ├── pricing-method.md          # 单价换算、实付公式、券门槛、风险标记
 │   └── report-spec.md             # 报告 10 章节、双屏断点、自检清单
+├── vendor/                        # 随包内置的可视化 / HTML 技能（写报告前必读）
+│   ├── answer-visualization-preference/SKILL.md
+│   ├── html-visualization/html/   # 含 scripts/shot.py 双屏自检
+│   └── html-visualization/ai-visualization/  # 图表/图解分支，按需加载
 ├── assets/report-skeleton.html    # 只含比价章节的骨架（示例数据全部虚构）
 ├── docs/                          # 设计说明、平台移植、FAQ
 ├── examples/                      # 触发话术与一次任务的流程示例（无真实数据）
@@ -221,7 +225,7 @@ ecommerce-price-hunt/
 - **不做自动化抓取**：走真实 App UI，价格与活动（大促、百亿补贴、券后）都能看到；代价是慢，且强依赖设备状态。
 - **不猜数据**：读不到就写进「局限」；查不到的批准文号标「未核实」。
 - **不越界**：应用锁、登录、验证码、支付一律交还用户；结算页只看到价格为止，不提交订单。
-- **不绑定宿主**：报告样式与自检可复用宿主的 HTML 技能，也可按 `report-spec.md` 自行实现。
+- **不绑定宿主**：报告样式、组件、图表与双屏自检全部来自随包的两个可视化/HTML 技能（`vendor/`），换宿主不用改配置。
 
 ## 已知限制
 
@@ -344,9 +348,9 @@ Full terms, copy-paste attribution blocks and "where the notice counts": see [`N
 
 **No cloning, no terminal commands, no jumping up and down this page.**
 
-1. **Download the zip** (`ecommerce-price-hunt-v1.3.0.zip`):
-   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
-   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.3.0/ecommerce-price-hunt-v1.3.0.zip>
+1. **Download the zip** (`ecommerce-price-hunt-v1.4.0.zip`):
+   - GitHub: <https://github.com/neurotracee/ecommerce-price-hunt/releases/download/v1.4.0/ecommerce-price-hunt-v1.4.0.zip>
+   - Gitee (faster in mainland China): <https://gitee.com/bio234/ecommerce-price-hunt/releases/download/v1.4.0/ecommerce-price-hunt-v1.4.0.zip>
 2. **Hand the zip to DSH** — the safest route is to drag the **file** you just downloaded into the chat, or attach it; alternatively paste the download link and let it fetch the file (see the note below).
    > 💡 **Both routes work: downloading by hand is the safer bet, pasting the link is worth a try.**
    > - **Recommended:** download the zip yourself and send the **file** (drag it in, or attach it).
@@ -416,6 +420,8 @@ cp -r ecommerce-price-hunt ~/.dsh/skills/
 
 For other hosts (Claude Code, WorkBuddy, custom harnesses), follow their own skill / prompt directory convention; without a skill mechanism, use `SKILL.md` as a system prompt and inject `references/*.md` per the on-demand table. See [docs/portability.md](docs/portability.md).
 
+> **Report layout does not depend on the host**: the HTML and visualisation skills are **bundled** under `vendor/` (`answer-visualization-preference` and `HTML & Visualization`). Before writing any HTML you must read both of them, **using relative paths only**; the chart/graphic branch additionally loads the third one (`ai-visualization`) on demand. Nothing is hard-coded to a machine-specific absolute path. See [`vendor/README.md`](vendor/README.md).
+
 ## Layout
 
 ```
@@ -427,6 +433,7 @@ LICENSE-DOCS.md              CC BY-SA 4.0 — documentation and prompts (full le
 NOTICE.md                    license & attribution rules, DSH go provenance
 references/*.md              on-demand playbooks (platforms, screen reading, pricing math, report spec)
 assets/report-skeleton.html  section skeleton only; all sample numbers are fictional
+vendor/                      bundled visualisation / HTML skills (must be read before writing the report)
 docs/ examples/ scripts/     design notes, usage examples, validation / packaging / publishing
 images/wechat-donate.png     the WeChat tip QR shown in this README (not packed into the zip)
 .github/                     issue & PR templates, CI validation

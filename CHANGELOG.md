@@ -4,6 +4,33 @@
 
 本文件自 **1.1.0**（首个公开发布版本）起维护；更早的内部草稿未公开发布，不追溯记录。
 
+## [1.4.0] - 2026-11-09
+
+**功能版本：HTML 报告改为「随包技能驱动」，不再依赖宿主的 HTML 技能。**
+
+### 新增 · 随包内置两个可视化 / HTML 技能（`vendor/`）
+
+- `vendor/answer-visualization-preference/SKILL.md`：回答可视化偏好（该不该出图、出图形态、色块/进度条/箭头设计语言、移动端断点）。
+- `vendor/html-visualization/html/`：单页 HTML 技能，含 `scripts/shot.py` 双屏自检脚本与 `references/`（前端设计、灵动报告、图表、Windows 兼容等）。
+- `vendor/html-visualization/ai-visualization/`：图表/图解路由技能（ECharts、HTML-SVG、原图叠加、生成式配图等分支）。
+- `vendor/README.md`：来源映射、相对路径约定、**不要就地修改**、第三方版权说明（`vendor/` 内容版权归原作者，本项目许可不覆盖）。
+
+### 变更 · `SKILL.md`「交付：HTML 报告」
+
+- 明确要求：**写 HTML 前必须同时完整读** `vendor/answer-visualization-preference/SKILL.md` 与 `vendor/html-visualization/html/SKILL.md`；报告含图表/图解时再加读 `vendor/html-visualization/ai-visualization/SKILL.md`（按需，不预读）。
+- **路径只准用相对路径** `vendor/...`：严禁写死 `C://Users//...`、`%LOCALAPPDATA%\...`、`~/.dsh/skills/...`、`/mnt/...` 等环境专属路径。
+- 双屏自检命令改为随包脚本：`python3 vendor/html-visualization/html/scripts/shot.py ...`（原为 `~/.dsh/skills/html/scripts/shot.py`）。
+- `vendor/` 缺失时（只拷了 `SKILL.md` 等少数文件）：如实说明并降级到 `references/report-spec.md`，**不得假装读过**。
+- 「按需加载」表、文件职责、顶部速览同步改写。
+
+### 同步修订
+
+- `references/report-spec.md`：样式与自检来源改为随包技能，命令示例换成 `vendor/...` 相对路径。
+- `docs/portability.md`：原「HTML 技能的替换」改为「随包内置，不再依赖宿主」；`docs/why-this-skill.md`、`examples/sample-session.md`、`CONTRIBUTING.md`、`README.md`（中英）同步。
+- `scripts/pack.py`：`INCLUDE_DIRS` 增加 `vendor`，两个技能随 zip 分发。
+- `scripts/validate.py`：新增校验——随包技能文件必须存在、`SKILL.md` 必须要求阅读这两个技能、必须写明「严禁写死」绝对路径、`SKILL.md` 不得出现 `AppData` / `.user_skills` 等本机路径。
+- 版本号 1.3.0 → 1.4.0。
+
 ## [1.3.0] - 2026-11-08
 
 **功能版本：Skill 自带版本自检与升级提示。** 比价方法本身未改动，新增的是「交付之后」的一小段收尾动作。

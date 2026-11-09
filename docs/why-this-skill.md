@@ -35,7 +35,7 @@
 | 首次做某平台 | `platform-playbooks.md` |
 | 读不到屏幕、误点、页面是图 | `screen-reading.md` |
 | 换算、券与运费 | `pricing-method.md` |
-| 写报告 | `report-spec.md`（+ 宿主 HTML 技能） |
+| 写报告 | `report-spec.md` + 随包 `vendor/` 下的两个可视化/HTML 技能 |
 
 入口文件本身保持精简，长手册只在触发时加载。
 
@@ -66,9 +66,9 @@
 
 ## 5. 为什么不绑定 DSH go 的本地路径
 
-原始 Skill 里引用了 `~/.dsh/skills/html/SKILL.md` 这类宿主专属路径。开源之后，它应当能被任意具备读屏能力的 Agent 复用。因此：
+`vendor/` 里的两个技能，早期在本地是以宿主专属绝对路径引用的（形如 `%LOCALAPPDATA%\...\.user_skills\...` 或 `~/.dsh/skills/html`）。开源之后它必须能被任意具备读屏能力的 Agent 复用，因此：
 
-- 报告样式与双屏自检**优先**复用宿主 HTML 技能；
+- 报告样式与双屏自检改为**随包分发**（`vendor/`），写 HTML 前必须同时读两个技能，全部用相对路径；
 - 没有该技能时，按 `references/report-spec.md` 的断点与自检清单自行实现；
 - 具体映射见 [portability.md](portability.md)。
 

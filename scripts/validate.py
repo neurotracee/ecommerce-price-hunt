@@ -210,6 +210,18 @@ for _url in ("https://github.com/neurotracee/ecommerce-price-hunt",
              "https://gitee.com/bio234/ecommerce-price-hunt"):
     require(_url in _skill, f"SKILL.md 缺少仓库地址 {_url}")
 require("优先 Gitee" in _skill, "SKILL.md 缺少「优先 Gitee 检查版本」的规则")
+for _v in ("vendor/README.md",
+           "vendor/answer-visualization-preference/SKILL.md",
+           "vendor/html-visualization/html/SKILL.md",
+           "vendor/html-visualization/ai-visualization/SKILL.md",
+           "vendor/html-visualization/html/scripts/shot.py"):
+    require((ROOT / _v).is_file(), f"缺少随包技能文件 {_v}")
+for _v in ("vendor/answer-visualization-preference/SKILL.md",
+           "vendor/html-visualization/html/SKILL.md"):
+    require(_v in _skill, f"SKILL.md 未要求写 HTML 前阅读 {_v}")
+require("严禁写死" in _skill, "SKILL.md 未禁止写死绝对路径")
+require(".user_skills" not in _skill and "AppData" not in _skill,
+        "SKILL.md 出现了本机专属路径，必须改为相对路径 vendor/...")
 require("越界请求怎么答" in _skill, "SKILL.md 缺少「越界请求怎么答」安全边界")
 require("与本项目及作者无关" in _skill,
         "SKILL.md 缺少越界请求的风险提示（须声明与项目/作者无关）")

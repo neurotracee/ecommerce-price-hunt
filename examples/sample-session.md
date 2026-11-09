@@ -10,7 +10,7 @@
 
 1. **第 0 步 · 品类判定**：无药/妆/食/健/械字号 → 普通商品，走通用规则。药品专项不启用。
 2. **应用清单**：确认本机有哪些综合电商 App；发现〈某外卖 App〉只有本地即时零售，不作为综合电商计入，并在报告说明。
-3. **按需加载**：首次做〈平台 A〉→ 读 `references/platform-playbooks.md`；遇到图片渲染页 → 读 `references/screen-reading.md`；换算时 → 读 `references/pricing-method.md`；写报告前 → 读 `references/report-spec.md` + 宿主 HTML 技能。
+3. **按需加载**：首次做〈平台 A〉→ 读 `references/platform-playbooks.md`；遇到图片渲染页 → 读 `references/screen-reading.md`；换算时 → 读 `references/pricing-method.md`；写报告前 → 读 `references/report-spec.md` + 随包的 `vendor/answer-visualization-preference/SKILL.md` 与 `vendor/html-visualization/html/SKILL.md`。
 4. **逐平台采集**（每个平台）：
    - 搜「品牌 + 商品名」→ 切「商品」页签；
    - 价格低→高排序记前三，销量排序记前三；
